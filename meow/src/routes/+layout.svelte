@@ -11,7 +11,7 @@
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p>visit <a href="https://sit.instructure.com/courses/65029" target="_blank" rel="noreferrer noopener">canvas</a> to view the senior design course</p>
 	</footer>
 </div>
 

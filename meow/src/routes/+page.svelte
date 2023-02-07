@@ -1,31 +1,34 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import { time } from '../store.js';
+
+	const formatter = new Intl.DateTimeFormat('en', {
+		hour12: true,
+		hour: 'numeric',
+		minute: '2-digit',
+		second: '2-digit'
+	});
 </script>
 
 <svelte:head>
 	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<meta name="description" content="CATS demo app" />
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
+	<span>
+		<div class="box">
+			<h2>Images load in here from API</h2>
+		</div>
 
-		to your new<br />SvelteKit app
+		<div class="box">
+			<h1>The time is {formatter.format($time)}</h1>
+		</div>	
+	</span>
+	<h1>
+		Home Page<br />Miau
 	</h1>
 
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
 
-	<Counter />
 </section>
 
 <style>
@@ -40,20 +43,18 @@
 	h1 {
 		width: 100%;
 	}
-
-	.welcome {
-		display: block;
-		position: relative;
+	span {
+		display: flex;
 		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
 	}
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+	.box {
+		width: 300px;
+		border: 1px solid #aaa;
+		border-radius: 20px;
+		box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+		padding: 5em;
+		margin: 0 0 1em 0;
 	}
+
 </style>
