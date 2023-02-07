@@ -2,6 +2,16 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
+
+	import { time } from '../store.js';
+
+	const formatter = new Intl.DateTimeFormat('en', {
+		hour12: true,
+		hour: 'numeric',
+		minute: '2-digit',
+		second: '2-digit'
+	});
+
 </script>
 
 <header>
@@ -10,6 +20,15 @@
 			<img src={logo} alt="SvelteKit" />
 		</a>
 	</div>
+
+	<div class="box">
+		<h2>Images load in here from API</h2>
+	</div>
+
+	<div class="box">
+		<h1>The time is {formatter.format($time)}</h1>
+	</div>
+
 
 	<nav>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
@@ -125,5 +144,14 @@
 
 	a:hover {
 		color: var(--color-theme-1);
+	}
+
+	.box {
+		width: 300px;
+		border: 1px solid #aaa;
+		border-radius: 20px;
+		box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+		padding: 5em;
+		margin: 0 0 1em 0;
 	}
 </style>
