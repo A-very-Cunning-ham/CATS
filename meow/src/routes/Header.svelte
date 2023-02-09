@@ -1,13 +1,16 @@
 <script>
 	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
+	import logo from '$lib/images/meow.png';
 	import github from '$lib/images/github.svg';
+	import login from '$lib/images/login-icon.png';
+	import login2 from '$lib/images/login-icon-2.png';
 </script>
 
 <header>
 	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
+		<!-- target and rel elements open link in new tab -->
+		<a href="https://tenor.com/view/rickroll-roll-rick-never-gonna-give-you-up-never-gonna-gif-22954713" target="_blank" rel="noreferrer noopener">
+			<img src={logo} alt="meow-cat" />
 		</a>
 	</div>
 
@@ -19,11 +22,14 @@
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 			</li>
+			<li aria-current={$page.url.pathname === '/landing' ? 'page' : undefined}>
+				<a href="/landing">Landing</a>
+			</li>
+			<li aria-current={$page.url.pathname === '/analytics' ? 'page' : undefined}>
+				<a href="/analytics">Analytics</a>
+			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
-			</li>
-			<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
-				<a href="/sverdle">Sverdle</a>
 			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
@@ -31,10 +37,14 @@
 		</svg>
 	</nav>
 
-	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
+	<div class="corner" style="display: flex-end">
+		<!-- target and rel elements open link in new tab -->
+		<a href="https://github.com/A-very-Cunning-ham/CATS/tree/main" target="_blank" rel="noreferrer noopener"> 
 			<img src={github} alt="GitHub" />
 		</a>
+		<button>
+			<img src={login} alt="Login"/>
+		</button>
 	</div>
 </header>
 
@@ -125,5 +135,11 @@
 
 	a:hover {
 		color: var(--color-theme-1);
+	}
+	button {
+		border: none;
+		cursor: pointer;
+		appearance: none;
+		background-color: inherit;
 	}
 </style>
