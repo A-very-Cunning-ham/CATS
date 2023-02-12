@@ -1,0 +1,20 @@
+mqtt:
+  host: mosquitto
+  port: 1883
+  # user: mosquitto
+  # password: 1234
+cameras:
+  webcam:
+    rtmp:
+      enabled: false
+    ffmpeg:
+      inputs:
+        - path: /dev/video0
+          roles:
+            - detect
+      input_args: -f v4l2 -avoid_negative_ts make_zero -fflags +genpts+discardcorrupt -use_wallclock_as_timestamps 1
+      output_args:
+        detect: -f rawvideo -pix_fmt yuv420p
+    detect:
+      width: 640
+      height: 480
