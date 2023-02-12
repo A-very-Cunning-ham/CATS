@@ -6,15 +6,30 @@ mqtt:
 cameras:
   webcam:
     rtmp:
-      enabled: false
+      enabled: False
     ffmpeg:
       inputs:
         - path: /dev/video0
+          input_args: -f v4l2 -avoid_negative_ts make_zero -fflags +genpts+discardcorrupt -use_wallclock_as_timestamps 1
           roles:
             - detect
-      input_args: -f v4l2 -avoid_negative_ts make_zero -fflags +genpts+discardcorrupt -use_wallclock_as_timestamps 1
+            # - rtmp
+            - record
       output_args:
+        # rtmp: -vf transpose=2,transpose=2 -c:v libx264 -preset ultrafast -tune zerolatency -b:v 600k -f flv
+        # record: -vf transpose=2,transpose=2 -c:v libx264 -preset ultrafast -tune zerolatency -b:v 600k -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -an
+        record: -f rawvideo -pix_fmt yuv420p
         detect: -f rawvideo -pix_fmt yuv420p
+      # output_args:
+      #   detect: -f rawvideo -pix_fmt yuv420p
     detect:
-      width: 640
-      height: 480
+      width: 1280
+      height: 720
+      fps: 5
+    snapshots: 
+      enabled: True
+      # bounding_box: True
+      # crop:
+      #   False
+
+
