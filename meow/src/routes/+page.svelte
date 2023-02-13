@@ -1,5 +1,6 @@
 <script>
 	import { time } from '../store.js';
+	import {onMount} from 'svelte';
 
 	const formatter = new Intl.DateTimeFormat('en', {
 		hour12: true,
@@ -7,6 +8,21 @@
 		minute: '2-digit',
 		second: '2-digit'
 	});
+
+	let url = ''
+	let todos = []
+
+	const getTodos = async () => {
+		const response = await fetch(url)
+		const data = await response.json()
+		todos = data
+	}
+
+	onMount(() => {getTodos()})
+
+	//const load = url => fetch(url).then(res => res.json());
+	//const apiURL = ''
+	//{#await load(apiURL) then data}
 </script>
 
 <svelte:head>
@@ -17,7 +33,16 @@
 <section>
 	<span>
 		<div class="box">
-			<h2>Images load in here from API</h2>
+			
+			<pre>
+				<div>
+				{#each todos as todo }
+					<li>
+						<h3>todo.image</h3>
+					</li>           
+				{/each}
+				</div>  
+			</pre>
 		</div>
 
 		<div class="box">
