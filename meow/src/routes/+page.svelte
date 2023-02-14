@@ -1,4 +1,5 @@
 <script>
+	
 	import { time } from '../store.js';
 	import {onMount} from 'svelte';
 	import Gallery from 'svelte-image-gallery'
@@ -39,7 +40,9 @@
 	<meta name="description" content="CATS demo app" />
 </svelte:head>
 
-<section>
+<section class= "flex flex-col justify-items-center align-middle">
+	<h1 class="mt-5">C.A.T.S</h1>
+	<h1 class="mb-5">Camera Assisted Tracking System</h1>
 	<span>
 		<div class="box">
 			
@@ -62,33 +65,8 @@
 		Home Page<br />Miau
 	</h1>
 
-
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-	}
-	span {
-		display: flex;
-		width: 100%;
-	}
-
-	.box {
-		width: 300px;
-		border: 1px solid #aaa;
-		border-radius: 20px;
-		box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-		padding: 5em;
-		margin: 0 0 1em 0;
-	}
 
 </style>
