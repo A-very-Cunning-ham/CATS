@@ -1,17 +1,26 @@
 <script>
 	import { page } from '$app/stores';
 	import logo from '$lib/images/meow.png';
-	import github from '$lib/images/github.svg';
-	import login from '$lib/images/login-icon.png';
-	import login2 from '$lib/images/login-icon-2.png';
+	import profile from '$lib/images/profile.png';
+	import { Button, Chevron, Dropdown, DropdownItem, DropdownDivider, DropdownHeader } from 'flowbite-svelte'
+
 </script>
 
-<header>
-	<div class="corner">
-		<!-- target and rel elements open link in new tab -->
-		<a href="https://tenor.com/view/rickroll-roll-rick-never-gonna-give-you-up-never-gonna-gif-22954713" target="_blank" rel="noreferrer noopener">
-			<img src={logo} alt="meow-cat" />
-		</a>
+<header class="flex justify-between">
+	
+	<div class="flex justify-between">
+		<div class="w-12 h-12">
+			<!-- target and rel elements open link in new tab -->
+			<a href="https://tenor.com/view/rickroll-roll-rick-never-gonna-give-you-up-never-gonna-gif-22954713" target="_blank" rel="noreferrer noopener" class="flex items-center justify-center w-full h-full">
+				<img src={logo} alt="meow-cat" class="w-8 h-8 object-contain"/>
+			</a>
+		</div>
+		<div class="p-2">
+			<button type="button" class="btn-invis" disabled>Sign Up</button>
+		</div>
+		<div class="p-2">
+			<button type="button" class="btn-invis" disabled>Log In</button>
+		</div>
 	</div>
 
 	<nav>
@@ -37,42 +46,28 @@
 		</svg>
 	</nav>
 
-	<div class="corner" style="display: flex-end">
-		<!-- target and rel elements open link in new tab -->
-		<a href="https://github.com/A-very-Cunning-ham/CATS/tree/main" target="_blank" rel="noreferrer noopener"> 
-			<img src={github} alt="GitHub" />
-		</a>
-		<button>
-			<img src={login} alt="Login"/>
-		</button>
+	<div class="flex justify-between">
+		<div class="p-2 flex space-x-2 justify-center object-contain">
+			<button type="button" class="btn-primary">Sign Up</button>
+		</div>
+		<div class="p-2 flex space-x-2 justify-center object-contain">
+			<button type="button" class="btn-primary">Log In</button>
+		</div>
+		
+		<div class="w-12 h-12">
+			<button class="flex items-center justify-center w-full h-full">
+				<img src={profile} alt="Profile" class="w-8 h-8 object-contain"/>
+			</button>
+			<Dropdown>
+				<DropdownItem>Profile</DropdownItem>
+				<DropdownItem>Settings</DropdownItem>
+				<DropdownItem>Log Out</DropdownItem>
+			</Dropdown>
+		</div>
 	</div>
 </header>
 
 <style>
-	header {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
-
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
-	}
-
 	nav {
 		display: flex;
 		justify-content: center;
@@ -135,11 +130,5 @@
 
 	a:hover {
 		color: var(--color-theme-1);
-	}
-	button {
-		border: none;
-		cursor: pointer;
-		appearance: none;
-		background-color: inherit;
 	}
 </style>
