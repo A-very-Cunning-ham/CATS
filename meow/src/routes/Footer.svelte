@@ -1,6 +1,5 @@
 <script>
 	import { page } from '$app/stores';
-	import logo from '$lib/images/meow.png';
 	import github from '$lib/images/github.svg';
 </script>
 
@@ -11,7 +10,7 @@
 		</a>
 	</div>
 
-	<p>visit <a href="https://sit.instructure.com/courses/65029" target="_blank" rel="noreferrer noopener" class="font-bold">canvas</a> to view the senior design course</p>
+	<!-- <p>visit <a href="https://sit.instructure.com/courses/65029" target="_blank" rel="noreferrer noopener" class="font-bold">canvas</a> to view the senior design course</p> -->
 
     <div class="corner"/>
 </footer>

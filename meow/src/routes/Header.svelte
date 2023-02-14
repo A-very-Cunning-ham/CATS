@@ -2,7 +2,27 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/meow.png';
 	import profile from '$lib/images/profile.png';
-	import { Button, Chevron, Dropdown, DropdownItem, DropdownDivider, DropdownHeader } from 'flowbite-svelte'
+	import { Dropdown, DropdownItem } from 'flowbite-svelte'
+
+	function logOut() {
+		var x = document.getElementById("login");
+		var y = document.getElementById("signup");
+		var z = document.getElementById("profile-icon");
+		
+		x.className = "btn-primary";
+		y.className = "btn-primary";
+		z.style.display = "none";
+	}
+
+	function userReturn() {
+		var x = document.getElementById("login");
+		var y = document.getElementById("signup");
+		var z = document.getElementById("profile-icon");
+		
+		x.className = "btn-invis";
+		y.className = "btn-invis";
+		z.style.display = "block";
+	}
 
 </script>
 
@@ -11,7 +31,7 @@
 	<div class="flex justify-between">
 		<div class="w-12 h-12">
 			<!-- target and rel elements open link in new tab -->
-			<a href="https://tenor.com/view/rickroll-roll-rick-never-gonna-give-you-up-never-gonna-gif-22954713" target="_blank" rel="noreferrer noopener" class="flex items-center justify-center w-full h-full">
+			<a href="/" class="flex items-center justify-center w-full h-full">
 				<img src={logo} alt="meow-cat" class="w-8 h-8 object-contain"/>
 			</a>
 		</div>
@@ -48,20 +68,20 @@
 
 	<div class="flex justify-between">
 		<div class="p-2 flex space-x-2 justify-center object-contain">
-			<button type="button" class="btn-primary">Sign Up</button>
+			<button id="signup" type="button" class="btn-primary" on:click|once={userReturn}>Sign Up</button>
 		</div>
 		<div class="p-2 flex space-x-2 justify-center object-contain">
-			<button type="button" class="btn-primary">Log In</button>
+			<button id="login" type="button" class="btn-primary" on:click|once={userReturn}>Log In</button>
 		</div>
 		
 		<div class="w-12 h-12">
-			<button class="flex items-center justify-center w-full h-full">
+			<button id="profile-icon" style="display:none" class="flex items-center justify-center w-full h-full">
 				<img src={profile} alt="Profile" class="w-8 h-8 object-contain"/>
 			</button>
 			<Dropdown>
 				<DropdownItem>Profile</DropdownItem>
 				<DropdownItem>Settings</DropdownItem>
-				<DropdownItem>Log Out</DropdownItem>
+				<DropdownItem on:click|once={logOut}>Log Out</DropdownItem>
 			</Dropdown>
 		</div>
 	</div>
