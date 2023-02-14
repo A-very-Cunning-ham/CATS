@@ -16,7 +16,7 @@
 			  <TableHeadCell>Cat ID</TableHeadCell>
 			  <TableHeadCell>Date Last Seen</TableHeadCell>
 			  <TableHeadCell>Location</TableHeadCell>
-			  <TableHeadCell>Age</TableHeadCell>
+			  <TableHeadCell>Is Neutered</TableHeadCell>
 			  <TableHeadCell></TableHeadCell>
 			</TableHead>
 			<TableBody >
@@ -24,28 +24,35 @@
 				<TableBodyCell>#37395462839471</TableBodyCell>
 				<TableBodyCell>02-13-2023</TableBodyCell>
 				<TableBodyCell>Site 53</TableBodyCell>
-				<TableBodyCell>Adult</TableBodyCell>
+				<TableBodyCell>Y</TableBodyCell>
 				<TableBodyCell><a href="/analytics/cat-details">View More Data</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>#59027495937438</TableBodyCell>
 				<TableBodyCell>02-11-2023</TableBodyCell>
 				<TableBodyCell>Site 51</TableBodyCell>
-				<TableBodyCell>Adult</TableBodyCell>
+				<TableBodyCell>Y</TableBodyCell>
 				<TableBodyCell><a href="/analytics/cat-details">View More Data</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>#12947202837584</TableBodyCell>
 				<TableBodyCell>02-10-2023</TableBodyCell>
 				<TableBodyCell>Site 78</TableBodyCell>
-				<TableBodyCell>Kitten</TableBodyCell>
+				<TableBodyCell>N</TableBodyCell>
 				<TableBodyCell><a href="/analytics/cat-details">View More Data</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>#73629592798392</TableBodyCell>
 				<TableBodyCell>02-10-2023</TableBodyCell>
 				<TableBodyCell>Site 18</TableBodyCell>
-				<TableBodyCell>Adolescent</TableBodyCell>
+				<TableBodyCell>UND</TableBodyCell>
+				<TableBodyCell><a href="/analytics/cat-details">View More Data</a></TableBodyCell>
+			  </TableBodyRow>
+			  <TableBodyRow>
+				<TableBodyCell>#48279372838273</TableBodyCell>
+				<TableBodyCell>02-10-2023</TableBodyCell>
+				<TableBodyCell>Site 36</TableBodyCell>
+				<TableBodyCell>Y</TableBodyCell>
 				<TableBodyCell><a href="/analytics/cat-details">View More Data</a></TableBodyCell>
 			  </TableBodyRow>
 			</TableBody>
