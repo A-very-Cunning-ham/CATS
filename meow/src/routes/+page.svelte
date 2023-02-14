@@ -1,6 +1,15 @@
 <script>
 	import { time } from '../store.js';
 	import {onMount} from 'svelte';
+	import Gallery from 'svelte-image-gallery'
+	import { MongoClient } from "mongodb"
+	import { URI } from '@env'
+
+	const client = new MongoClient(URI)
+
+	function handleImage(e) {
+		console.log(e.detail.src)
+	}
 
 	const formatter = new Intl.DateTimeFormat('en', {
 		hour12: true,
@@ -36,11 +45,11 @@
 			
 			<pre>
 				<div>
-				{#each todos as todo }
-					<li>
-						<h3>todo.image</h3>
-					</li>           
-				{/each}
+					<Gallery on:click={handleImage}>
+						{#each todos as todo }
+							<img src="{todo.path}" alt="Cat!" />
+						{/each}
+					</Gallery>
 				</div>  
 			</pre>
 		</div>
