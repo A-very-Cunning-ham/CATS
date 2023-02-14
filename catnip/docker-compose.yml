@@ -26,7 +26,12 @@ services:
       FRIGATE_RTSP_PASSWORD: "password"
     # extra_hosts:
     #   - "host.docker.internal:host-gateway"
-    network_mode: "host"
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # network_mode: "host"
+
+
   
 
 

@@ -23,8 +23,7 @@ def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
     client.subscribe("frigate/+/+/snapshot")
 def on_message(client, userdata, msg):
-    print(msg.topic + " @ " + str(datetime.datetime.now()) + str(msg.payload))
-    # print(msg.properties)
+    print(msg.topic + " @ " + str(datetime.datetime.now()) + " image payload")
 
     camera = msg.topic.split("/");
     newID = ObjectId()
