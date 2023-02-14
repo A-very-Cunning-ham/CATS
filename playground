@@ -1,0 +1,17 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('mongodbVSCodePlaygroundDB');
+
+db.images.drop();
+
+db.images.insertMany([
+  {'path': './src/lib/images/cats/cat1.jpg', 'object-detected': 'cat' },
+  {'path': './src/lib/images/cats/cat2.jpg', 'object-detected': 'cat' },
+  {'path': './src/lib/images/cats/cat3.jpg', 'object-detected': 'cat' },
+  {'path': './src/lib/images/cats/cat4.jpg', 'object-detected': 'cat' },
+  {'path': './src/lib/images/cats/cat5.jpg', 'object-detected': 'cat' },
+]);

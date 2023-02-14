@@ -1,28 +1,17 @@
-<script>
+<script lang='ts'>
 	import { time } from '../store.js';
 	import {onMount} from 'svelte';
+	import Gallery from 'svelte-image-gallery'
+	import type { PageData } from './$types';
 
-	const formatter = new Intl.DateTimeFormat('en', {
-		hour12: true,
-		hour: 'numeric',
-		minute: '2-digit',
-		second: '2-digit'
-	});
+	export let data: PageData
 
-	let url = ''
-	let todos = []
+	$: ({images} = data)
 
-	const getTodos = async () => {
-		const response = await fetch(url)
-		const data = await response.json()
-		todos = data
-	}
+	var dateFromObjectId = function (objectId) {
+	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+};
 
-	onMount(() => {getTodos()})
-
-	//const load = url => fetch(url).then(res => res.json());
-	//const apiURL = ''
-	//{#await load(apiURL) then data}
 </script>
 
 <svelte:head>
@@ -30,56 +19,29 @@
 	<meta name="description" content="CATS demo app" />
 </svelte:head>
 
-<section>
-	<span>
-		<div class="box">
-			
-			<pre>
-				<div>
-				{#each todos as todo }
-					<li>
-						<h3>todo.image</h3>
-					</li>           
-				{/each}
-				</div>  
-			</pre>
-		</div>
-
-		<div class="box">
-			<h1>The time is {formatter.format($time)}</h1>
-		</div>	
-	</span>
-	<h1>
-		Home Page<br />Miau
-	</h1>
-
-
+<section class= "flex flex-col justify-items-center align-middle self-center">
+	<h1 class="mt-5">C.A.T.S.</h1>
+	<h1 class="mb-5">Camera Assisted Tracking System</h1>
+	
+	<div class="block self-center content-center max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">	
+		<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Sample Data Loaded From Backend:</h5>
+		<div>
+			<ul>
+			{#each images as image}
+			<li>
+				<!-- <img src="{image.path}" alt="Cat!" /> -->
+				<img src="{image.path}" alt="Cat!" class="max-w-md"/>
+				<h6 class="font-bold">Date from Object ID: </h6>{dateFromObjectId(image._id)}
+				<h6> Detected Object: {image['object-detected']} </h6>
+				<br/>
+			</li>
+			{/each}
+			</ul>
+		</div>  
+	</div>
+	
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-	}
-	span {
-		display: flex;
-		width: 100%;
-	}
-
-	.box {
-		width: 300px;
-		border: 1px solid #aaa;
-		border-radius: 20px;
-		box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-		padding: 5em;
-		margin: 0 0 1em 0;
-	}
 
 </style>

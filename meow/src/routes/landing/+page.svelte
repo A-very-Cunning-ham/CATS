@@ -18,11 +18,13 @@
 </svelte:head>
 
 <section class= "flex flex-col justify-items-center align-middle">
-	<h1 class="mt-5">C.A.T.S</h1>
+
+	<h1 class="mt-5">C.A.T.S.</h1>
 	<h1 class="mb-5">Camera Assisted Tracking System</h1>
 	<span class="flex justify-center">
 		<div class="box">
-			<h2>Images load in here from API</h2>
+			<h1>Graphs</h1>
+
 		</div>
 
 		<div class="box">
@@ -35,7 +37,9 @@
 		</div>
 
 		<div class="box">
-			<h1>Words</h1>
+
+			<h2>Words</h2>
+
 		</div>	
 	</span>
 

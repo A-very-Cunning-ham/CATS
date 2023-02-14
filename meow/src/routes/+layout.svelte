@@ -1,27 +1,21 @@
 <script>
 	import Header from './Header.svelte';
+	import Footer from './Footer.svelte';
 	import './styles.css';
 </script>
 
-<div class="app">
+<div class="flex flex-col min-h-screen">
 	<Header />
 
 	<main>
 		<slot />
 	</main>
 
-	<footer>
-		<p>visit <a href="https://sit.instructure.com/courses/65029" target="_blank" rel="noreferrer noopener">canvas</a> to view the senior design course</p>
-	</footer>
+	<Footer />
+	
 </div>
 
 <style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
 	main {
 		flex: 1;
 		display: flex;
@@ -33,21 +27,4 @@
 		box-sizing: border-box;
 	}
 
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
 </style>

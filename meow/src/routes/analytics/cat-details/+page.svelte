@@ -4,5 +4,5 @@
 </svelte:head>
 
 <div>
-    <p>Table</p>
+    <h1>Individual Cat Details</h1>
 </div>
