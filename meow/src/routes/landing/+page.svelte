@@ -3,7 +3,6 @@
 	console.log(data);
 	
 	import { time } from '../../store.js';
-
 	const formatter = new Intl.DateTimeFormat('en', {
 		hour12: true,
 		hour: 'numeric',
@@ -51,5 +50,4 @@
 		padding: 3em;
 		margin: 4px 4px 4px 4px;
 	}
-
 </style>
