@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  frigate:
+    container_name: frigate
+    privileged: true # this may not be necessary for all setups
+    restart: unless-stopped
+    image: blakeblackshear/frigate:stable
+    shm_size: "64mb" # update for your cameras based on calculation above
+    devices:
+      # - /dev/bus/usb:/dev/bus/usb # passes the USB Coral, needs to be modified for other versions
+      # - /dev/apex_0:/dev/apex_0 # passes a PCIe Coral, follow driver instructions here https://coral.ai/docs/m2/get-started/#2a-on-linux
+      # - /dev/dri/renderD128 # for intel hwaccel, needs to be updated for your hardware
+      - /dev/video0:/dev/video0
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config/config.yml:/config/config.yml:ro
+      - ./media:/media/frigate
+      - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "5000:5000"
+      - "1935:1935" # RTMP feeds
+    environment:
+      FRIGATE_RTSP_PASSWORD: "password"
+  
+  mosquitto:
+    image: eclipse-mosquitto:2
+    # network_mode: host
+    volumes:
+      - ./mosquitto/conf:/mosquitto/config/
+      - ./mosquitto/data:/mosquitto/data/
+      - ./mosquitto/log:/mosquitto/log/
+    ports:
+      - "1883:1883"
+
+  # mqtt:
+  # container_name: mqtt
+  # image: eclipse-mosquitto:1.6
+  # ports:
+  #   - "1883:1883"
