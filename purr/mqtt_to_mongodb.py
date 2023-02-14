@@ -28,12 +28,12 @@ def on_message(client, userdata, msg):
 
     camera = msg.topic.split("/");
     newID = ObjectId()
-    filepath = f"/images/{camera[1]}-{newID}.jpeg"
+    filepath = f"{camera[1]}-{newID}.jpeg"
 
-    with open(filepath, 'wb') as file_handler:
+    with open("/images/"+filepath, 'wb') as file_handler:
         file_handler.write(msg.payload) 
 
-    collection.insert_one({'_id': newID, 'path': filepath, 'object': camera[2]})
+    collection.insert_one({'_id': newID, 'camera': camera[1], 'filename': filepath, 'object-detected': camera[2], 'catIDs': []})
 
 db = get_database()
 collection = db['cat_images']
