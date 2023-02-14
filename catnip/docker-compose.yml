@@ -24,16 +24,16 @@ services:
       - "1935:1935" # RTMP feeds
     environment:
       FRIGATE_RTSP_PASSWORD: "password"
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # network_mode: "host"
+
+
   
-  mosquitto:
-    image: eclipse-mosquitto:2
-    # network_mode: host
-    volumes:
-      - ./mosquitto/conf:/mosquitto/config/
-      - ./mosquitto/data:/mosquitto/data/
-      - ./mosquitto/log:/mosquitto/log/
-    ports:
-      - "1883:1883"
+
 
   # mqtt:
   # container_name: mqtt

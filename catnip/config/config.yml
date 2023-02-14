@@ -1,5 +1,5 @@
 mqtt:
-  host: mosquitto
+  host: host.docker.internal
   port: 1883
   # user: mosquitto
   # password: 1234
@@ -26,8 +26,26 @@ cameras:
       width: 1280
       height: 720
       fps: 5
-    snapshots: 
+      max_disappeared: 10
+    mqtt:
+      # Optional: Enable publishing snapshot via mqtt for camera (default: shown below)
+      # NOTE: Only applies to publishing image data to MQTT via 'frigate/<camera_name>/<object_name>/snapshot'.
+      # All other messages will still be published.
       enabled: True
+      # Optional: print a timestamp on the snapshots (default: shown below)
+      timestamp: False
+      # Optional: draw bounding box on the snapshots (default: shown below)
+      bounding_box: False
+      # Optional: crop the snapshot (default: shown below)
+      crop: False
+      # Optional: height to resize the snapshot to (default: shown below)
+      height: 720
+      # Optional: jpeg encode quality (default: shown below)
+      quality: 90
+snapshots: 
+  enabled: True
+  timestamp: False
+  bounding_box: False
       # bounding_box: True
       # crop:
       #   False

@@ -3,6 +3,7 @@
 	console.log(data);
 	
 	import { time } from '../../store.js';
+
 	const formatter = new Intl.DateTimeFormat('en', {
 		hour12: true,
 		hour: 'numeric',
@@ -17,11 +18,13 @@
 </svelte:head>
 
 <section class= "flex flex-col justify-items-center align-middle">
+
 	<h1 class="mt-5">C.A.T.S.</h1>
 	<h1 class="mb-5">Camera Assisted Tracking System</h1>
 	<span class="flex justify-center">
 		<div class="box">
 			<h1>Graphs</h1>
+
 		</div>
 
 		<div class="box">
@@ -34,7 +37,9 @@
 		</div>
 
 		<div class="box">
+
 			<h2>Words</h2>
+
 		</div>	
 	</span>
 
@@ -50,4 +55,5 @@
 		padding: 3em;
 		margin: 4px 4px 4px 4px;
 	}
+
 </style>
