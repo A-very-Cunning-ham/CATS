@@ -29,7 +29,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ./images:/images
+      - ./images:/meow/static/images
 
   purr:
     depends_on:

@@ -31,7 +31,7 @@
 			<h1>The time is {formatter.format($time)}</h1>
 		</div>	
 	</span>
-	<span class="flex justify-center">
+	<!-- <span class="flex justify-center">
 		<div class="box">
 			<h2>Words</h2>
 		</div>
@@ -41,7 +41,7 @@
 			<h2>Words</h2>
 
 		</div>	
-	</span>
+	</span> -->
 
 </section>
 

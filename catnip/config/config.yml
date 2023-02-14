@@ -50,4 +50,29 @@ snapshots:
       # crop:
       #   False
 
-
+objects:
+  # Optional: list of objects to track from labelmap.txt (default: shown below)
+  track:
+    - cat
+  # Optional: mask to prevent all object types from being detected in certain areas (default: no mask)
+  # Checks based on the bottom center of the bounding box of the object.
+  # NOTE: This mask is COMBINED with the object type specific mask below
+  # mask: 0,0,1000,0,1000,200,0,200
+  # Optional: filters to reduce false positives for specific object types
+  # filters:
+  #   cat:
+  #     # Optional: minimum width*height of the bounding box for the detected object (default: 0)
+  #     min_area: 5000
+  #     # Optional: maximum width*height of the bounding box for the detected object (default: 24000000)
+  #     max_area: 100000
+  #     # Optional: minimum width/height of the bounding box for the detected object (default: 0)
+  #     min_ratio: 0.5
+  #     # Optional: maximum width/height of the bounding box for the detected object (default: 24000000)
+  #     max_ratio: 2.0
+  #     # Optional: minimum score for the object to initiate tracking (default: shown below)
+  #     min_score: 0.5
+  #     # Optional: minimum decimal percentage for tracked object's computed score to be considered a true positive (default: shown below)
+  #     threshold: 0.7
+      # Optional: mask to prevent this object type from being detected in certain areas (default: no mask)
+      # Checks based on the bottom center of the bounding box of the object
+      # mask: 0,0,1000,0,1000,200,0,200
