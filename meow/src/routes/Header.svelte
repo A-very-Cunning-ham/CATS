@@ -68,10 +68,10 @@
 
 	<div class="flex justify-between">
 		<div class="p-2 flex space-x-2 justify-center object-contain">
-			<button id="signup" type="button" class="btn-primary" on:click|once={userReturn}>Sign Up</button>
+			<button id="signup" type="button" class="btn-primary" on:click={userReturn}>Sign Up</button>
 		</div>
 		<div class="p-2 flex space-x-2 justify-center object-contain">
-			<button id="login" type="button" class="btn-primary" on:click|once={userReturn}>Log In</button>
+			<button id="login" type="button" class="btn-primary" on:click={userReturn}>Log In</button>
 		</div>
 		
 		<div class="w-12 h-12">
@@ -81,7 +81,7 @@
 			<Dropdown>
 				<DropdownItem>Profile</DropdownItem>
 				<DropdownItem>Settings</DropdownItem>
-				<DropdownItem on:click|once={logOut}>Log Out</DropdownItem>
+				<DropdownItem on:click={logOut}>Log Out</DropdownItem>
 			</Dropdown>
 		</div>
 	</div>
