@@ -3,7 +3,7 @@ version: "3.8"
 services:
   mongodb:
     image: mongo:4.4.18
-    restart: unless-stopped
+    # restart: unless-stopped
     env_file: ./.env
     environment:
       - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
@@ -12,11 +12,12 @@ services:
       - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
     volumes:
       - db:/data/db
+    command: --quiet
   app:
     depends_on:
       - mongodb
     build: ./meow
-    restart: unless-stopped
+    # restart: unless-stopped
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
