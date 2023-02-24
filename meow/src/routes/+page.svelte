@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { time } from '../store.js';
+	import { time } from '$lib/stores/store';
 	import {onMount} from 'svelte';
 	import Gallery from 'svelte-image-gallery'
 	import type { PageData } from './$types';
