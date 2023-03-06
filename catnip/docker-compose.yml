@@ -24,6 +24,7 @@ services:
       - "1935:1935" # RTMP feeds
     environment:
       FRIGATE_RTSP_PASSWORD: "password"
+    command: libcamera-vid -t 0 --inline -o - | cvlc stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/stream1}' :demux=h264
     # extra_hosts:
     #   - "host.docker.internal:host-gateway"
 
