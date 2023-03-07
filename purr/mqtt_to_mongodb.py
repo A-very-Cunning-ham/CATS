@@ -25,7 +25,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     print(msg.topic + " @ " + str(datetime.datetime.now()) + " image payload")
 
-    camera = msg.topic.split("/");
+    camera = msg.topic.split("/")
     newID = ObjectId()
     filepath = f"{camera[1]}-{newID}.jpeg"
 

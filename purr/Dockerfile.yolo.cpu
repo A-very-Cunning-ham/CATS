@@ -1,0 +1,21 @@
+FROM pytorch/pytorch:latest
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get install python3-pip libjpeg-dev libopenblas-dev libopenmpi-dev libomp-dev curl git -y
+
+RUN python3 -m pip install -U pip
+# RUN python3 -m pip install gdown
+
+# # installing CUDA-enabled torch
+# RUN gdown "https://drive.google.com/file/d/1TqC6_2cwqiYacjoLhLgrZoap6-sVL2sd/view?usp=sharing" --fuzzy
+# RUN python3 -m pip install ./torch-1.10.0a0+git36449ea-cp36-cp36m-linux_aarch64.whl
+
+# # installing CUDA-enabled torchvision
+# RUN gdown "https://drive.google.com/file/d/1C7y6VSIBkmL2RQnVy8xF9cAnrrpJiJ-K/view?usp=sharing" --fuzzy
+# RUN python3 -m pip install ./torchvision-0.11.0a0+fa347eb-cp36-cp36m-linux_aarch64.whl
+WORKDIR /
+RUN git clone https://github.com/WongKinYiu/yolov7.git
+WORKDIR /yolov7
+RUN python3 -m pip install -r ./requirements.txt
+RUN curl -LOJ https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7x.pt
+cmd python3 ./detect.py --source 0 --device 0 --weights yolov7x.pt
