@@ -35,13 +35,30 @@
 			</a>
 		</div>
 		<div class="p-2">
-			<button type="button" class="btn-invis" disabled>Sign Up</button>
-		</div>
-		<div class="p-2">
 			<button type="button" class="btn-invis" disabled>Log In</button>
 		</div>
 	</div>
-
+	{#if $isAuthenticated}
+	<nav>
+		<svg viewBox="0 0 2 3" aria-hidden="true">
+			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
+		</svg>
+		<ul>
+			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
+				<a href="/">Overview</a>
+			</li>
+			<li aria-current={$page.url.pathname === '/landing' ? 'page' : undefined}>
+				<a href="/landing">Landing</a>
+			</li>
+			<li aria-current={$page.url.pathname === '/analytics' ? 'page' : undefined}>
+				<a href="/analytics">Analytics</a>
+			</li>
+		</ul>
+		<svg viewBox="0 0 2 3" aria-hidden="true">
+			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
+		</svg>
+	</nav>
+	{:else}
 	<nav>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
@@ -49,12 +66,7 @@
 		<ul>
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/landing' ? 'page' : undefined}>
-				<a href="/landing">Landing</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/analytics' ? 'page' : undefined}>
-				<a href="/analytics">Analytics</a>
+				
 			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
@@ -64,12 +76,10 @@
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
 		</svg>
 	</nav>
+	{/if}
 
 	{#if !$isAuthenticated}
 	<div class="flex justify-between">
-		<div class="p-2 flex space-x-2 justify-center object-contain">
-			<button id="signup" type="button" class="btn-primary" on:click={login}>Sign Up</button>
-		</div>
 		<div class="p-2 flex space-x-2 justify-center object-contain">
 			<button id="login" type="button" class="btn-primary" on:click={login}>Log In</button>
 		</div>
@@ -82,9 +92,6 @@
 	</div>
 	{:else}
 	<div class="flex justify-between">
-		<div class="p-2">
-			<button type="button" class="btn-invis" disabled>Sign Up</button>
-		</div>
 		<div class="p-2">
 			<button type="button" class="btn-invis" disabled>Log In</button>
 		</div>
