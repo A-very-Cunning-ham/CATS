@@ -4,9 +4,13 @@
 	import auth from '$lib/services/authService'
 	import { isAuthenticated, user } from '$lib/stores/store'
 
+	//prints out user profile and metadata in console for testing purposes
 	function checkStatus() {
+		const userInfo = JSON.parse(JSON.stringify($user))
+		
 		console.log("User authenticated: " + JSON.stringify($isAuthenticated))
-		console.log("UserId: " + JSON.stringify(user))
+		console.log("UserId: " + userInfo.name)
+		console.log("User info: " + JSON.stringify($user))
 	}
 
 </script>
