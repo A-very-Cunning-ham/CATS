@@ -3,25 +3,24 @@
 	import logo from '$lib/images/meow.png';
 	import profile from '$lib/images/profile.png';
 	import { Dropdown, DropdownItem } from 'flowbite-svelte'
+	import auth from '$lib/services/authService'
+	import { isAuthenticated, user } from '$lib/stores/store'
+	import { onMount } from 'svelte'
+	
+	let auth0Client = {}
+	
+	onMount(async () => {
+		auth0Client = await auth.createClient()
+		isAuthenticated.set(await auth0Client.isAuthenticated())
+		user.set(await auth0Client.getUser())
+	})
 
-	function logOut() {
-		var x = document.getElementById("login");
-		var y = document.getElementById("signup");
-		var z = document.getElementById("profile-icon");
-		
-		x.className = "btn-primary";
-		y.className = "btn-primary";
-		z.style.display = "none";
+	function login() {
+		auth.loginWithPopup(auth0Client)
 	}
 
-	function userReturn() {
-		var x = document.getElementById("login");
-		var y = document.getElementById("signup");
-		var z = document.getElementById("profile-icon");
-		
-		x.className = "btn-invis";
-		y.className = "btn-invis";
-		z.style.display = "block";
+	function logout() {
+		auth.logout(auth0Client)
 	}
 
 </script>
@@ -36,13 +35,30 @@
 			</a>
 		</div>
 		<div class="p-2">
-			<button type="button" class="btn-invis" disabled>Sign Up</button>
-		</div>
-		<div class="p-2">
 			<button type="button" class="btn-invis" disabled>Log In</button>
 		</div>
 	</div>
-
+	{#if $isAuthenticated}
+	<nav>
+		<svg viewBox="0 0 2 3" aria-hidden="true">
+			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
+		</svg>
+		<ul>
+			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
+				<a href="/">Overview</a>
+			</li>
+			<li aria-current={$page.url.pathname === '/landing' ? 'page' : undefined}>
+				<a href="/landing">Landing</a>
+			</li>
+			<li aria-current={$page.url.pathname === '/analytics' ? 'page' : undefined}>
+				<a href="/analytics">Analytics</a>
+			</li>
+		</ul>
+		<svg viewBox="0 0 2 3" aria-hidden="true">
+			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
+		</svg>
+	</nav>
+	{:else}
 	<nav>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
@@ -50,12 +66,7 @@
 		<ul>
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/landing' ? 'page' : undefined}>
-				<a href="/landing">Landing</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/analytics' ? 'page' : undefined}>
-				<a href="/analytics">Analytics</a>
+				
 			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
@@ -65,26 +76,38 @@
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
 		</svg>
 	</nav>
+	{/if}
 
+	{#if !$isAuthenticated}
 	<div class="flex justify-between">
 		<div class="p-2 flex space-x-2 justify-center object-contain">
-			<button id="signup" type="button" class="btn-primary" on:click|once={userReturn}>Sign Up</button>
-		</div>
-		<div class="p-2 flex space-x-2 justify-center object-contain">
-			<button id="login" type="button" class="btn-primary" on:click|once={userReturn}>Log In</button>
+			<button id="login" type="button" class="btn-primary" on:click={login}>Log In</button>
 		</div>
 		
 		<div class="w-12 h-12">
 			<button id="profile-icon" style="display:none" class="flex items-center justify-center w-full h-full">
 				<img src={profile} alt="Profile" class="w-8 h-8 object-contain"/>
 			</button>
+		</div>
+	</div>
+	{:else}
+	<div class="flex justify-between">
+		<div class="p-2">
+			<button type="button" class="btn-invis" disabled>Log In</button>
+		</div>
+	
+		<div class="w-12 h-12">
+			<button id="profile-icon" class="flex items-center justify-center w-full h-full">
+				<img src={profile} alt="Profile" class="w-8 h-8 object-contain"/>
+			</button>
 			<Dropdown>
 				<DropdownItem>Profile</DropdownItem>
 				<DropdownItem>Settings</DropdownItem>
-				<DropdownItem on:click|once={logOut}>Log Out</DropdownItem>
+				<DropdownItem on:click={logout}>Log Out</DropdownItem>
 			</Dropdown>
 		</div>
 	</div>
+	{/if}	
 </header>
 
 <style>

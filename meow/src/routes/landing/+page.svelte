@@ -2,7 +2,7 @@
 	export let data;
 	console.log(data);
 	
-	import { time } from '../../store.js';
+	import { time } from '$lib/stores/store';
 
 	const formatter = new Intl.DateTimeFormat('en', {
 		hour12: true,

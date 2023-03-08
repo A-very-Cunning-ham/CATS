@@ -1,6 +1,14 @@
 <script>
 	import { page } from '$app/stores';
 	import github from '$lib/images/github.svg';
+	import auth from '$lib/services/authService'
+	import { isAuthenticated, user } from '$lib/stores/store'
+
+	function checkStatus() {
+		console.log("User authenticated: " + JSON.stringify($isAuthenticated))
+		console.log("UserId: " + JSON.stringify(user))
+	}
+
 </script>
 
 <footer class="flex justify-between items-center p-3">
@@ -10,9 +18,10 @@
 		</a>
 	</div>
 
-	<!-- <p>visit <a href="https://sit.instructure.com/courses/65029" target="_blank" rel="noreferrer noopener" class="font-bold">canvas</a> to view the senior design course</p> -->
-
-    <div class="corner"/>
+	<div class="px-3">
+			<button type="button" class="btn-primary" 
+			on:click={checkStatus}>User Status</button>
+	</div>
 </footer>
 
 <style>
