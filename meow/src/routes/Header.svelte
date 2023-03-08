@@ -67,6 +67,9 @@
 				<a href="/">Home</a>
 				
 			</li>
+			<li aria-current={$page.url.pathname === '/pricing' ? 'page' : undefined}>
+				<a href="/pricing">Pricing</a>
+			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
 			</li>
