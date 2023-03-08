@@ -33,7 +33,9 @@
 			<!-- <ul>
 			{#each images as image}
 			<li> -->
+				
 				<!-- <img src="{image.path}" alt="Cat!" /> -->
+				
 				<!-- <img src="{"./images/"+image.filename}" alt="Cat!" class="max-w-md"/>
 				<h6 class="font-bold">Date from Object ID: </h6>{dateFromObjectId(image._id)}
 				<h6> Detected Object: {image['object-detected']} </h6>
@@ -52,8 +54,7 @@
 	<h1 class="mt-5">C.A.T.S.</h1>
 	<h1 class="mb-5">Camera Assisted Tracking System</h1>
 	
-	<Button class="w-32 self-center" href="/pricing">Get Started</Button>
-	
+	<Button class="w-32 self-center no-underline" href="/pricing">Get Started</Button>
 	
 </section>
 

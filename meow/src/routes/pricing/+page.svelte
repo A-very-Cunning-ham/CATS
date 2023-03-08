@@ -52,7 +52,7 @@
 					<span class="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
 				</li>
 			</ul>
-			<Button class="w-full">Choose plan</Button>
+			<Button class="w-full" href="/">Choose plan</Button>
 		  </Card>
 
 		  <Card padding="xl">
@@ -97,7 +97,7 @@
 					<span class="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
 				</li>
 			</ul>
-			<Button class="w-full">Choose plan</Button>
+			<Button class="w-full" href="/">Choose plan</Button>
 		  </Card>
 
 		  <Card padding="xl">
@@ -142,7 +142,7 @@
 					<span class="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
 				</li>
 			</ul>
-			<Button class="w-full">Choose plan</Button>
+			<Button class="w-full" href="/">Choose plan</Button>
 		  </Card>
 	</div>
 </section>
