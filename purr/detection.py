@@ -177,7 +177,7 @@ save_processed_img = True
 save_processed_description = True
 
 # source = #TODO: get image to run on
-weights = 'ear-model.pt'
+weights = 'cat-and-ear-model.pt'
 model = attempt_load(weights, map_location=device)
 stride = int(model.stride.max())  # model stride
 
