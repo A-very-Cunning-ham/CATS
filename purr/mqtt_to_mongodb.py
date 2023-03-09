@@ -1,15 +1,20 @@
+print("booting up!")
 import paho.mqtt.client as mqtt
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import datetime
 import os
 import detection
+import cv2
+import numpy as np
 
 
 # MongoDB code
 def get_database():
+    
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
     CONNECTION_STRING = f"mongodb://{os.environ['MONGODB_USER']}:{os.environ['MONGODB_PASSWORD']}@mongodb"
+    # CONNECTION_STRING = "mongodb://root:123456@mongodb:7017/"
     #       CONNECTION_STRING = f"mongodb://{os.environ['MONGODB_USER']}:{os.environ['MONGODB_PASSWORD']}@localhost/test?retryWrites=true&w=majority"
     print(CONNECTION_STRING)
     #    # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
@@ -32,13 +37,16 @@ def on_message(client, userdata, msg):
     objects_detected, image = detection.process_image(msg.payload)
 
     with open("/images/" + filepath, 'wb') as file_handler:
-        file_handler.write(msg.payload)
+        img_encode = cv2.imencode('.jpg', image)[1]
+        data_encode = np.array(img_encode)
+        byte_encode = data_encode.tobytes()
+        file_handler.write(byte_encode)
 
     mongo_object = {'_id': newID, 'camera': camera[1], 'filename': filepath, 'object-detected': camera[2], 'catIDs': [],
                     'objects-found': objects_detected}
     collection.insert_one(mongo_object)
 
-
+print("python running before db!")
 db = get_database()
 collection = db['cat_images']
 print("python running!")

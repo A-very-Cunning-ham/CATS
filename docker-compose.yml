@@ -11,7 +11,7 @@ services:
     ports:
       - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
     volumes:
-      - db:/data/db
+      - db2:/data/db
     command: --quiet
   app:
     depends_on:
@@ -35,7 +35,10 @@ services:
   purr:
     depends_on:
       - mongodb
-    build: ./purr
+    build: 
+      context: ./purr
+      dockerfile: Dockerfile.yolo.cpu
+
     restart: unless-stopped
     env_file: ./.env
     # ports:
@@ -50,6 +53,7 @@ services:
     # tty: true
     volumes:
       - ./images:/images
+
 
   mosquitto:
     image: eclipse-mosquitto:2
@@ -67,6 +71,12 @@ services:
 # this creates the database files in the project directory
 volumes:
   db:
+    driver: local
+    driver_opts:
+      type: none
+      device: "./data"
+      o: bind
+  db2:
     driver: local
     driver_opts:
       type: none
