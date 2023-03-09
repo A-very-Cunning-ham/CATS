@@ -3,6 +3,12 @@
 	import { isAuthenticated, user } from '$lib/stores/store'
 
 	const userInfo = JSON.parse(JSON.stringify($user))
+	let group = [1,3,4]
+
+	function save() {
+		//save general information from form
+		//set user site preferences to group
+	}
 
 </script>
 
@@ -58,18 +64,18 @@
 				</div>
 				<div class="py-3">
 				<ul class="w-48 p-3bg-white rounded-lg border border-gray-200 divide-y divide-gray-200">
-					<li><Checkbox class="p-3">Site 3</Checkbox></li>
-					<li><Checkbox class="p-3">Site 4</Checkbox></li>
-					<li><Checkbox class="p-3">Site 5</Checkbox></li>
-					<li><Checkbox class="p-3">Site 6</Checkbox></li>
-					<li><Checkbox class="p-3">Site 7</Checkbox></li>
-					<li><Checkbox class="p-3">Site 8</Checkbox></li>
-					<li><Checkbox class="p-3">Site 9</Checkbox></li>
+					<li><Checkbox class="p-3" bind:group value={1}>Site 1</Checkbox></li>
+					<li><Checkbox class="p-3" bind:group value={2}>Site 2</Checkbox></li>
+					<li><Checkbox class="p-3" bind:group value={3}>Site 3</Checkbox></li>
+					<li><Checkbox class="p-3" bind:group value={4}>Site 4</Checkbox></li>
+					<li><Checkbox class="p-3" bind:group value={5}>Site 5</Checkbox></li>
+					<li><Checkbox class="p-3" bind:group value={6}>Site 6</Checkbox></li>
+					<li><Checkbox class="p-3" bind:group value={7}>Site 7</Checkbox></li>
 				</ul>
 			</div>
 			</div>
 			<div class="py-6 self-center">
-				<Button type="submit" class="w-48" form="general">Save Changes</Button>
+				<Button type="submit" class="w-48" form="general" on:click={save}>Save Changes</Button>
 			</div>
 			</div>
 		</div>

@@ -1,15 +1,57 @@
-<script>
-	export let data;
-	console.log(data);
+<script lang='ts'>
+	import type { PageData } from './$types';
+	import { scaleLinear } from 'd3-scale';
+	import { user } from '$lib/stores/store';
+	export let data: PageData
 	
-	import { time } from '$lib/stores/store';
+	const userInfo = JSON.parse(JSON.stringify($user))
 
-	const formatter = new Intl.DateTimeFormat('en', {
-		hour12: true,
-		hour: 'numeric',
-		minute: '2-digit',
-		second: '2-digit'
-	});
+	let points: { date: string, cats: number }[] = []
+
+	let amounts = [1,2,5,3,0,2,1,5,6,0,3,0,1,3,2,4]
+
+	for(let x = 1; x < 11; x++){
+		points.push({date: 'Feb ' + x, cats: amounts[x] })
+	}
+
+	const xTicks = ['Feb 1 2023', 'Feb 2 2023', 'Feb 3 2023', 'Feb 4 2023', 'Feb 5 2023', 'Feb 6 2023', 'Feb 7 2023', 'Feb 8 2023', 'Feb 9 2023', 'Feb 10 2023', 'Feb 11 2023'];
+	const yTicks = [0, 1, 2, 3, 4, 5, 6];
+	const padding = { top: 20, right: 15, bottom: 20, left: 25 };
+
+	let width = 500;
+	let height = 200;
+
+	function formatMobile(tick) {
+		return "'" + tick.toString().slice(-2);
+	}
+
+	$: xScale = scaleLinear()
+		.domain([0, xTicks.length])
+		.range([padding.left, width - padding.right]);
+
+	$: yScale = scaleLinear()
+		.domain([0, Math.max.apply(null, yTicks)])
+		.range([height - padding.bottom, padding.top]);
+
+	$: innerWidth = width - (padding.left + padding.right);
+	$: barWidth = innerWidth / xTicks.length;
+
+	$: ({images} = data)
+
+	let images_perm = data
+
+	var dateFromObjectId = function (objectId) {
+	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+	};
+
+	let i: number = 0
+	
+	for (i = 0; i < images_perm.images.length; i++) {
+		images_perm.images[i].date = new Date(dateFromObjectId(images_perm.images[i]._id))
+	}
+
+	console.log(images_perm)
+
 </script>
 
 <svelte:head>
@@ -17,19 +59,52 @@
 	<meta name="description" content="Graphs" />
 </svelte:head>
 
-<section class= "flex flex-col justify-items-center align-middle">
+<section class= "flex flex-col justify-center">
 
-	<h1 class="mt-5">C.A.T.S.</h1>
-	<h1 class="mb-5">Camera Assisted Tracking System</h1>
+	<h1 class="py-5">Welcome Back, {userInfo.given_name}!</h1>
+	<span class="flex flex-col justify-center items-center py-6">
+		<p class="font-semibold text-2xl">
+			Site 1
+		</p>
+		<p class="text-xl">
+			Cats detected (per day)
+		</p>
+	</span>
 	<span class="flex justify-center">
-		<div class="box">
-			<h1>Graphs</h1>
 
+		<div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
+			<svg>
+				<!-- y axis -->
+				<g class="axis y-axis">
+					{#each yTicks as tick}
+						<g class="tick tick-{tick}" transform="translate(0, {yScale(tick)})">
+							<line x2="100%"></line>
+							<text y="-4">{tick} {tick === 20 ? ' per 1,000 population' : ''}</text>
+						</g>
+					{/each}
+				</g>
+		
+				<!-- x axis -->
+				<g class="axis x-axis">
+					{#each points as point, i}
+						<g class="tick" transform="translate({xScale(i)},{height})">
+							<text x="{barWidth/2}" y="-4">{width > 380 ? point.date : formatMobile(point.date)}</text>
+						</g>
+					{/each}
+				</g>
+		
+				<g class='bars'>
+					{#each points as point, i}
+						<rect
+							x="{xScale(i) + 2}"
+							y="{yScale(point.cats)}"
+							width="{barWidth - 4}"
+							height="{yScale(0) - yScale(point.cats)}"
+						></rect>
+					{/each}
+				</g>
+			</svg>
 		</div>
-
-		<div class="box">
-			<h1>The time is {formatter.format($time)}</h1>
-		</div>	
 	</span>
 	<!-- <span class="flex justify-center">
 		<div class="box">
@@ -54,6 +129,52 @@
 		box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 		padding: 3em;
 		margin: 4px 4px 4px 4px;
+	}
+
+	h2 {
+		text-align: center;
+	}
+
+	.chart {
+		width: 100%;
+		max-width: 500px;
+		margin: 0 auto;
+	}
+
+	svg {
+		position: relative;
+		width: 100%;
+		height: 200px;
+	}
+
+	.tick {
+		font-family: Helvetica, Arial;
+		font-size: .6em;
+		font-weight: 200;
+	}
+
+	.tick line {
+		stroke: #e2e2e2;
+		stroke-dasharray: 2;
+	}
+
+	.tick text {
+		fill: #000000;
+		text-anchor: start;
+	}
+
+	.tick.tick-0 line {
+		stroke-dasharray: 0;
+	}
+
+	.x-axis .tick text {
+		text-anchor: middle;
+	}
+
+	.bars rect {
+		fill: #a11;
+		stroke: none;
+		opacity: 0.65;
 	}
 
 </style>
