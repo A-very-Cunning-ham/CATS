@@ -6,6 +6,7 @@ import datetime
 import os
 import detection
 import cv2
+import numpy as np
 
 
 # MongoDB code
@@ -34,11 +35,12 @@ def on_message(client, userdata, msg):
     newID = ObjectId()
     filepath = f"{camera[1]}-{newID}.jpeg"
     objects_detected, image = detection.process_image(msg.payload)
-    # objects_detected = "aa"
 
     with open("/images/" + filepath, 'wb') as file_handler:
-        file_handler.write(msg.payload)
-    cv2.imwrite('.jpg', image)[1]
+        img_encode = cv2.imencode('.jpg', image)[1]
+        data_encode = np.array(img_encode)
+        byte_encode = data_encode.tobytes()
+        file_handler.write(byte_encode)
 
     mongo_object = {'_id': newID, 'camera': camera[1], 'filename': filepath, 'object-detected': camera[2], 'catIDs': [],
                     'objects-found': objects_detected}
