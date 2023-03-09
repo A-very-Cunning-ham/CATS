@@ -8,7 +8,7 @@
 
 	let points: { date: string, cats: number }[] = []
 
-	let amounts = [1,2,5,3,0,2,1,5,6,0,3,0,1,3,2,4]
+	let amounts = [1,2,5,3,0,2,1,5,6,0,3,5,1,3,2,4]
 
 	for(let x = 1; x < 11; x++){
 		points.push({date: 'Feb ' + x, cats: amounts[x] })

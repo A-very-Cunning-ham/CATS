@@ -6,11 +6,12 @@
 
 	//prints out user profile and metadata in console for testing purposes
 	function checkStatus() {
-		const userInfo = JSON.parse(JSON.stringify($user))
+		isAuthenticated.set(true)
+		// const userInfo = JSON.parse(JSON.stringify($user))
 		
-		console.log("User authenticated: " + JSON.stringify($isAuthenticated))
-		console.log("UserId: " + userInfo.name)
-		console.log("User info: " + JSON.stringify($user))
+		// console.log("User authenticated: " + JSON.stringify($isAuthenticated))
+		// console.log("UserId: " + userInfo.name)
+		// console.log("User info: " + JSON.stringify($user))
 	}
 
 </script>

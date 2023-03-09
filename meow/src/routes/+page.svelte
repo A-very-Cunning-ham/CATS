@@ -12,6 +12,8 @@
 	};
 
 	$: ({images} = data)
+	console.log(images)
+	console.log(data)
 
 </script>
 
@@ -33,7 +35,7 @@
 			{#each images as image}
 			<li>
 				<!-- <img src="{image.path}" alt="Cat!" /> -->
-				<img src="{image.path}" alt="Cat!" class="max-w-md"/>
+				<img src="/images/{image.filename}" alt="Cat!" class="max-w-md"/>
 				<h6 class="font-bold">Date from Object ID: </h6>{dateFromObjectId(image._id)}
 				<h6> Detected Object: {image['object-detected']} </h6>
 				<br/>
