@@ -13,8 +13,8 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="CATS demo app" />
+	<title>Graphs</title>
+	<meta name="description" content="Graphs" />
 </svelte:head>
 
 <section class= "flex flex-col justify-items-center align-middle">

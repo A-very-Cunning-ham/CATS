@@ -16,7 +16,7 @@
 	})
 
 	function login() {
-		auth.loginWithPopup(auth0Client)
+		auth.loginWithPopup(auth0Client)		
 	}
 
 	function logout() {
@@ -26,7 +26,6 @@
 </script>
 
 <header class="flex justify-between">
-	
 	<div class="flex justify-between">
 		<div class="w-12 h-12">
 			<!-- target and rel elements open link in new tab -->
@@ -47,8 +46,8 @@
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Overview</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/landing' ? 'page' : undefined}>
-				<a href="/landing">Landing</a>
+			<li aria-current={$page.url.pathname === '/graphs' ? 'page' : undefined}>
+				<a href="/graphs">Graphs</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/analytics' ? 'page' : undefined}>
 				<a href="/analytics">Analytics</a>
@@ -67,6 +66,9 @@
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 				
+			</li>
+			<li aria-current={$page.url.pathname === '/pricing' ? 'page' : undefined}>
+				<a href="/pricing">Pricing</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
@@ -101,7 +103,7 @@
 				<img src={profile} alt="Profile" class="w-8 h-8 object-contain"/>
 			</button>
 			<Dropdown>
-				<DropdownItem>Profile</DropdownItem>
+				<DropdownItem href="/profile" class="text-inherit no-underline hover:no-underline">Profile</DropdownItem>
 				<DropdownItem>Settings</DropdownItem>
 				<DropdownItem on:click={logout}>Log Out</DropdownItem>
 			</Dropdown>
