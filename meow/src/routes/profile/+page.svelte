@@ -1,13 +1,27 @@
 <script>
 	import { Avatar, Checkbox, Helper, Input, Label, Button } from "flowbite-svelte";
 	import { isAuthenticated, user } from '$lib/stores/store'
+	import axios from 'axios';
 
 	const userInfo = JSON.parse(JSON.stringify($user))
-	let group = [1,3,4]
+	let group = userInfo.sites
 
-	function save() {
+	async function save() {
 		//save general information from form
-		//set user site preferences to group
+		//update user metadata
+
+		// var options = {
+		// method: 'PATCH',
+		// url: 'https://http://localhost:8080/profile/api/v2/users/user_id',
+		// headers: {authorization: 'Bearer ABCD', 'content-type': 'application/json'},
+		// data: {user_metadata: {addresses: {home: '123 Main Street, Anytown, ST 12345'}}}
+		// };
+
+		// axios.request(options).then(function (response) {
+		// console.log(response.data);
+		// }).catch(function (error) {
+		// console.error(error);
+		// });
 	}
 
 </script>
