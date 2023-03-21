@@ -2,10 +2,13 @@
 	import type { PageData } from './$types';
 	import { scaleBand } from 'd3-scale';
 	import { user } from '$lib/stores/store';
+	import { Input, Button, Datepicker } from 'flowbite-svelte'; 
 	import Chart from 'svelte-frappe-charts';
 	export let data: PageData
 	
 	const userInfo = JSON.parse(JSON.stringify($user))
+
+	let dateSelection = 'mm/dd/yyyy'
 
 	// let points: { date: string, cats: number }[] = []
 
@@ -118,23 +121,23 @@
 </svelte:head>
 
 <section class= "flex flex-col justify-center">
-<!-- 
+ 
 	<h1 class="py-5">Welcome back, {userInfo.given_name}!</h1>
 	<span class="flex flex-col justify-center items-center py-6">
 		<p class="font-semibold text-2xl">
 			Site 1
 		</p>
-		<p class="text-xl">
+		<p class="text-xl mb-2">
 			Cats detected (per day)
 		</p>
+		<Datepicker range/>
 	</span>
-	<span class="flex justify-center"> -->
 
-		<Chart data={data1} type="bar" bind:this={chartRef}/>
-		<button on:click={onExport}>
-			|Export|
-		  </button>
-
+	<Chart data={data1} type="bar" bind:this={chartRef}/>
+	<span class="flex flex-col justify-center items-center py-6">
+		<Button class="w-16" on:click={onExport}>Export</Button>
+		
+	</span>
 		<!-- <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
 			<svg>
 				 y axis
@@ -170,62 +173,3 @@
 		</div> -->
 	<!-- </span> -->
 </section>
-
-<style>
-	.box {
-		width: 300px;
-		background-color: white;
-		border: 1px solid rgb(170, 170, 170);
-		border-radius: 20px;
-		box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-		padding: 3em;
-		margin: 4px 4px 4px 4px;
-	}
-
-	h2 {
-		text-align: center;
-	}
-
-	.chart {
-		width: 100%;
-		max-width: 500px;
-		margin: 0 auto;
-	}
-
-	svg {
-		position: relative;
-		width: 100%;
-		height: 200px;
-	}
-
-	.tick {
-		font-family: Helvetica, Arial;
-		font-size: .6em;
-		font-weight: 200;
-	}
-
-	.tick line {
-		stroke: #e2e2e2;
-		stroke-dasharray: 2;
-	}
-
-	.tick text {
-		fill: #000000;
-		text-anchor: start;
-	}
-
-	.tick.tick-0 line {
-		stroke-dasharray: 0;
-	}
-
-	.x-axis .tick text {
-		text-anchor: middle;
-	}
-
-	.bars rect {
-		fill: #a11;
-		stroke: none;
-		opacity: 0.65;
-	}
-
-</style>
