@@ -1,5 +1,13 @@
-<script>
+<script lang="ts">
 	import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+	import type { PageData } from './$types';
+	export let data: PageData
+
+	$: ({images} = data)
+
+	let images_perm = data
+
+	console.log(images_perm)
 </script>
 
 <svelte:head>
