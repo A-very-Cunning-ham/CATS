@@ -2,16 +2,24 @@
 	import {onMount} from 'svelte';
 	import { isAuthenticated, user } from '$lib/stores/store';
 	import { Button, Card, Carousel, CarouselTransition } from 'flowbite-svelte';
+	import Mongo  from './mongo.svelte';
+	import { invalidateAll } from '$app/navigation';
 
 	import type { PageData } from './$types';
-
 	export let data: PageData
 
 	var dateFromObjectId = function (objectId) {
-	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
 	};
 
 	$: ({images} = data)
+	
+	//let unique = {}
+
+	function restart() {
+		//unique = {} // every {} is unique, {} === {} evaluates to false
+		invalidateAll();
+	}
 
 </script>
 
@@ -29,6 +37,10 @@
 	<div class="block self-center content-center max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">	
 		<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Recent Events</h5>
 		<div id="list">
+			<br>
+			<!-- <button on:click={load}>Restart</button> -->
+			<Button class="w-32 self-center no-underline" on:click={restart}>Update</Button>
+			<br>
 			<ul>
 			{#each images as image}
 			<li>
@@ -41,6 +53,11 @@
 			{/each}
 			</ul>
 		</div> 
+		<div id="list">
+			<!-- {#key unique}
+			<Mongo data = {{images}}/>
+			{/key} -->
+		</div>
 	</div>
 	
 	

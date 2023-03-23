@@ -4,8 +4,13 @@
 	import { user } from '$lib/stores/store';
 	import { Input, Button, Datepicker } from 'flowbite-svelte'; 
 	import Chart from 'svelte-frappe-charts';
+	import { invalidateAll } from '$app/navigation';
 	export let data: PageData
 	
+	function restart() {
+		invalidateAll();
+	}
+
 	const userInfo = JSON.parse(JSON.stringify($user))
 
 	let dateSelection = 'mm/dd/yyyy'
