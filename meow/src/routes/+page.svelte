@@ -8,7 +8,7 @@
 	export let data: PageData
 
 	var dateFromObjectId = function (objectId) {
-	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
 	};
 
 	$: ({images} = data)
@@ -26,24 +26,26 @@
 	<h1 class="mt-5">C.A.T.S.</h1>
 	<h1 class="mb-5">Camera Assisted Tracking System</h1>
 	
-	<div class="block self-center content-center max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">	
-		<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Recent Events</h5>
+	<div class="flex flex-col items-center">	
+		<h5 class="mb-6 text-2xl font-bold tracking-tight text-gray-900">Recent Events</h5>
 		<div id="list">
-			<ul>
+			<ul class="grid grid-cols-2 gap-6">
 			{#each images as image}
-			<li>
+			<li class="flex flex-col gap-6 justify-between block self-center content-center p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 min-h-full">
 				<!-- <img src="{image.path}" alt="Cat!" /> -->
-				<img src="{image.path}" alt="Cat!" class="max-w-md"/>
-				<h6 class="font-bold">Date from Object ID: </h6>{dateFromObjectId(image._id)}
-				<h6> Detected Object: {image['object-detected']} </h6>
-				<br/>
+				<img src="{image.path}" alt="Cat!" class="object-cover"/>
+				<div>
+					<h6 class="font-bold">Time Detected: </h6>{dateFromObjectId(image._id)}
+					<div class="flex flex-row gap-2">
+					<h6 class="font-bold"> Detected Object: </h6>
+					<h6> {image['object-detected']} </h6>
+					</div>
+				</div>
 			</li>
 			{/each}
 			</ul>
 		</div> 
 	</div>
-	
-	
 </section>
 
 {:else}
