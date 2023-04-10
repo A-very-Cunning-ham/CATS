@@ -60,6 +60,20 @@ services:
     ports:
       - "1883:1883"
 
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    container_name: duckdns
+    environment:
+      - PUID=1000 #optional use 'id $user'
+      - PGID=1000 #optional
+      - TZ=America/New_York
+      - SUBDOMAINS=$DNS_SUBDOMAIN
+      - TOKEN=$DNS_TOKEN
+      - LOG_FILE=false #optional
+    volumes:
+      - ./duckdns/config:/config #optional
+    restart: unless-stopped
+
 # pip install -r requirements.txt
 
 # this creates the database files in the project directory
