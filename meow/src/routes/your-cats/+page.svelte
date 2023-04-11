@@ -3,15 +3,14 @@
 	import type { PageData } from './$types';
 	export let data: PageData
 	import { invalidateAll } from '$app/navigation';
-	import { Button } from 'flowbite-svelte';
+	
 	
 	var dateFromObjectId = function (objectId) {
 		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
 	};
 
-	$: ({cats} = data)
+	$: ({images} = data)
 
-	console.log(cats);
 	
 	let newCatModal = false;
 	let editing = false;
@@ -56,13 +55,13 @@
 			  <TableHeadCell></TableHeadCell>		
 			</TableHead>
 			<TableBody >
-			{#each cats as cat}
+			{#each images as image}
 				<TableBodyRow>
-				<TableBodyCell>{cat.name}</TableBodyCell>
-				<TableBodyCell>{dateFromObjectId(cat.events[0])}</TableBodyCell>
-				<TableBodyCell>{cat.age}</TableBodyCell>
-				<TableBodyCell>{cat.weight}</TableBodyCell>
-				<TableBodyCell>{cat.eartipped}</TableBodyCell>
+				<TableBodyCell>{image.name}</TableBodyCell>
+				<TableBodyCell>{image.events[0]}</TableBodyCell>
+				<TableBodyCell>{image.age}</TableBodyCell>
+				<TableBodyCell>{image.weight}</TableBodyCell>
+				<TableBodyCell>{image.neutered}</TableBodyCell>
 				<TableBodyCell><a href="/your-cats/cat-details">Details</a></TableBodyCell>
 			  </TableBodyRow>
 			  {/each}
@@ -83,14 +82,14 @@
 				<TableHeadCell></TableHeadCell>		
 			</TableHead>
 			<TableBody >
-			{#each cats as cat}
+			{#each images as image}
 				<TableBodyRow>
 				<TableBodyCell><Checkbox /></TableBodyCell>
-				<TableBodyCell>{cat.name}</TableBodyCell>
-				<TableBodyCell>{dateFromObjectId(cat.events[0])}</TableBodyCell>
-				<TableBodyCell>{cat.age}</TableBodyCell>
-				<TableBodyCell>{cat.weight}</TableBodyCell>
-				<TableBodyCell>{cat.eartipped}</TableBodyCell>
+				<TableBodyCell>{image.name}</TableBodyCell>
+				<TableBodyCell>{image.events[0]}</TableBodyCell>
+				<TableBodyCell>{image.age}</TableBodyCell>
+				<TableBodyCell>{image.weight}</TableBodyCell>
+				<TableBodyCell>{image.neutered}</TableBodyCell>
 				<TableBodyCell><a href="/your-cats/cat-details">Details</a></TableBodyCell>
 			  </TableBodyRow>
 			  {/each}

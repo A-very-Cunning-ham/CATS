@@ -6,17 +6,12 @@
 	import type { PageData } from './$types';
 	export let data: PageData
 	import { invalidateAll } from '$app/navigation';
-	import { MongoClient } from 'mongodb';
 	
 	var dateFromObjectId = function (objectId) {
 		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
 	};
 
 	$: ({images} = data)
-	
-	function addNewCat() {
-		// add new cat
-	}
 
 	let detectedCats = 1;
 	let recognized = 0;
@@ -38,6 +33,20 @@
 	function restart() {
 		//unique = {} // every {} is unique, {} === {} evaluates to false
 		invalidateAll();
+	}
+
+	async function addNewCat(e){
+		const formData = new FormData(e.target);
+
+		const data = {};
+		
+		for (let field of formData) {
+			const [key, value] = field;
+			data[key] = value;
+		}
+		
+		const result = await images.insertOne(e)
+		return result
 	}
   
 </script>
@@ -117,22 +126,22 @@
 			{/each}
 			</ul>
 			<Modal title="New Cat Registration" bind:open={newCatModal} autoclose size="lg">
-				<form class="flex flex-col space-y-6" action="#">
+				<form class="flex flex-col space-y-6" on:submit|preventDefault={addNewCat}>
 					<!-- <h3 class="text-xl font-medium text-gray-900 dark:text-white p-0">Sign in to our platform</h3> -->
 					<Label class="space-y-2 text-xl">
 						<span>Name</span>
-						<Input name="name" placeholder="Oreo" required />
+						<Input name="name" placeholder="Oreo" value="" required />
 					</Label>
 					
 					<div class="flex gap-6 justify-between">
 						<Label class="space-y-2 text-xl">
 							<span>Age</span>
-							<Input type="number" name="age" placeholder="24"/>
+							<Input type="number" name="age" value="" placeholder="24"/>
 							<Helper class="text-sm">Approximate age in months</Helper>
 						</Label>
 						<Label class="space-y-2 text-xl">
 							<span>Weight</span>
-							<Input type="number" name="weight" placeholder="5" />
+							<Input type="number" name="weight" value="" placeholder="5" />
 							<Helper class="text-sm">Weight in lbs</Helper>
 						</Label>
 						<Label class="space-y-2 text-xl">
