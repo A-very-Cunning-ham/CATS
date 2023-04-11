@@ -6,13 +6,13 @@
 	import type { PageData } from './$types';
 	export let data: PageData
 	import { invalidateAll } from '$app/navigation';
+	import { MongoClient } from 'mongodb';
 	
 	var dateFromObjectId = function (objectId) {
 		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
 	};
 
 	$: ({images} = data)
-	
 	let open = false;
 
 	let imagesrc;
@@ -48,6 +48,7 @@
 		<div id="list">
 			<ul class="grid grid-cols-2 gap-6">
 			{#each images as image}
+			{#if image['type'] == 'image'}
 			<li>
 				<Card class="flex flex-col gap-6 justify-between self-center content-center p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 hover:no-underline min-h-full">
 				<img src="{image.path}" alt="Cat!" class="object-cover max-h-64"/>
@@ -72,11 +73,13 @@
 								<div slot="header" class="p-3">
 									<Search size="md"/>
 								</div>
-								{#each images as image2}
+								{#each images as image}
+								{#if image['type'] == 'cat'}
 								<!-- TODO: if found in image, add checked attribute to Checkbox -->
 								<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
-								  <Checkbox>{image2._id}</Checkbox>
+								  <Checkbox>{image.name}</Checkbox>
 								</li>
+								{/if}
 								{/each}
 								<a slot="footer" href="/your-cats" class="flex items-center p-3 -mb-1 text-sm font-medium text-green-600 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-red-500 hover:underline">
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" /></svg>
@@ -93,6 +96,7 @@
 				</Modal>	
 				</Card>
 			</li>
+			{/if}
 			{/each}
 			</ul>
 			
