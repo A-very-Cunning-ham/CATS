@@ -26,6 +26,7 @@
 		"flowbite-svelte": "^0.29.13",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
+		"svelte-frappe-charts": "^1.10.0",
 		"tslib": "^2.4.1",
 		"typescript": "^4.9.3",
 		"vite": "^4.1.1"
@@ -38,6 +39,7 @@
 		"chart.js": "^4.2.1",
 		"cors": "^2.8.5",
 		"d3-scale": "^4.0.2",
+		"date-picker-svelte": "^2.3.0",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"moment": "^2.29.4",
