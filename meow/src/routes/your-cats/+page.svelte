@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import { Button, Helper, Label, Input, Modal, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch, Select } from 'flowbite-svelte';
+	import { cat } from '$lib/stores/store.js'
 	import type { PageData } from './$types';
 	export let data: PageData
 	import { invalidateAll } from '$app/navigation';
@@ -49,8 +50,8 @@
 			<TableHead>
 			  <TableHeadCell>Name/ID</TableHeadCell>
 			  <TableHeadCell>Date Last Seen</TableHeadCell>
-			  <TableHeadCell>Age</TableHeadCell>
-			  <TableHeadCell>Weight</TableHeadCell>
+			  <TableHeadCell>Age (in Months)</TableHeadCell>
+			  <TableHeadCell>Weight (in Pounds)</TableHeadCell>
 			  <TableHeadCell>Ear Tipped</TableHeadCell>	
 			  <TableHeadCell></TableHeadCell>		
 			</TableHead>
@@ -58,11 +59,11 @@
 			{#each images as image}
 				<TableBodyRow>
 				<TableBodyCell>{image.name}</TableBodyCell>
-				<TableBodyCell>{image.events[0]}</TableBodyCell>
+				<TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell>
 				<TableBodyCell>{image.age}</TableBodyCell>
 				<TableBodyCell>{image.weight}</TableBodyCell>
 				<TableBodyCell>{image.neutered}</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Details</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details" on:click={()=> cat.set(image)}>Details</a></TableBodyCell>
 			  </TableBodyRow>
 			  {/each}
 			</TableBody>
@@ -76,8 +77,8 @@
 				<TableHeadCell></TableHeadCell>
 				<TableHeadCell>Name/ID</TableHeadCell>
 				<TableHeadCell>Date Last Seen</TableHeadCell>
-				<TableHeadCell>Age</TableHeadCell>
-				<TableHeadCell>Weight</TableHeadCell>
+				<TableHeadCell>Age (in Months)</TableHeadCell>
+				<TableHeadCell>Weight (in Pounds)</TableHeadCell>
 				<TableHeadCell>Ear Tipped</TableHeadCell>	
 				<TableHeadCell></TableHeadCell>		
 			</TableHead>
@@ -86,11 +87,11 @@
 				<TableBodyRow>
 				<TableBodyCell><Checkbox /></TableBodyCell>
 				<TableBodyCell>{image.name}</TableBodyCell>
-				<TableBodyCell>{image.events[0]}</TableBodyCell>
+				<TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell>
 				<TableBodyCell>{image.age}</TableBodyCell>
 				<TableBodyCell>{image.weight}</TableBodyCell>
 				<TableBodyCell>{image.neutered}</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Details</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details" on:click={()=>cat.set(image)}>Details</a></TableBodyCell>
 			  </TableBodyRow>
 			  {/each}
 			</TableBody>
