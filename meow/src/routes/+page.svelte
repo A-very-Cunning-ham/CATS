@@ -5,15 +5,23 @@
 	import Video from './VIdeo.svelte';
 	import type { PageData } from './$types';
 	export let data: PageData
+	import { invalidateAll } from '$app/navigation';
 	
 	var dateFromObjectId = function (objectId) {
-	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
+		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
 	};
 
 	$: ({images} = data)
 	
 	let open = false;
+
 	let imagesrc;
+
+	function restart() {
+		//unique = {} // every {} is unique, {} === {} evaluates to false
+		invalidateAll();
+	}
+
 </script>
 
 <svelte:head>
@@ -33,6 +41,10 @@
 	</div>
 	<div class="flex flex-col items-center">	
 		<h5 class="mb-6 text-2xl font-bold tracking-tight text-gray-900">Recent Events</h5>
+		<Button class="w-32 self-center no-underline" on:click={restart}>Load New Images</Button>
+		<div>
+			___________________________
+		</div>
 		<div id="list">
 			<ul class="grid grid-cols-2 gap-6">
 			{#each images as image}
