@@ -4,6 +4,13 @@
 	import { scaleLinear } from 'd3-scale';
 	import { user } from '$lib/stores/store';
 	export let data: PageData
+	import { invalidateAll } from '$app/navigation';
+	import { Button } from 'flowbite-svelte';
+
+	function restart() {
+		//unique = {} // every {} is unique, {} === {} evaluates to false
+		invalidateAll();
+	}
 	
 	const userInfo = JSON.parse(JSON.stringify($user))
 
@@ -42,7 +49,7 @@
 	let images_perm = data
 
 	var dateFromObjectId = function (objectId) {
-	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
 	};
 
 	let i: number = 0
@@ -64,6 +71,7 @@
 <section class= "flex flex-col justify-center mb-12">
 
 	<h1 class="py-5">Welcome Back, {userInfo.given_name}!</h1>
+	<Button class="w-32 self-center no-underline" on:click={restart}>Load New Data</Button>
 	<span class="flex flex-col justify-center items-center py-6">
 		<p class="font-semibold text-2xl">
 			Site 1
