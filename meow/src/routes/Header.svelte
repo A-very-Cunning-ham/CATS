@@ -2,11 +2,12 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/meow.png';
 	import profile from '$lib/images/profile.png';
-	import { Dropdown, DropdownItem, Toast } from 'flowbite-svelte'
+	import { Dropdown, DropdownItem, Toast, Popover } from 'flowbite-svelte'
 	import auth from '$lib/services/authService'
 	import { isAuthenticated, user } from '$lib/stores/store'
 	import { onMount } from 'svelte'
 	import notif from '$lib/images/icons/notif.png'
+	import pin from '$lib/images/icons/pin.png'
 	
 	let auth0Client = {}
 	
@@ -99,15 +100,17 @@
 			<button type="button" class="btn-invis" disabled>Log In</button>
 		</div>
 		<div class="w-12 h-12">
-			<button class="flex items-center justify-center w-full h-full">
+			<button id="click" class="flex items-center justify-center w-full h-full">
 				<img src={notif} alt="bell" class="w-7 h-7 object-contain"/>
-				<Dropdown class="w-full">
-					<Toast>Dismissable User Notification.</Toast>
-					<Toast>NEW CAT DETECTED</Toast>
-					<Toast>Avery detected on Hudson</Toast>
-					<Toast>Something happened.</Toast>
-				</Dropdown>
-		</button>
+			</button>
+			<Popover class="text-sm font-light" placement="bottom" title="Notifications" triggeredBy="#click" trigger="click">
+				<div>
+				<Toast color="none">
+					<svelte:fragment slot="icon"><img src={pin} alt="pin" class="w-7 h-7"/></svelte:fragment>
+					Dismissable User Notification.
+				</Toast>
+				</div>
+			</Popover>
 		</div>
 		<div class="w-12 h-12">
 			<button id="profile-icon" class="flex items-center justify-center w-full h-full">

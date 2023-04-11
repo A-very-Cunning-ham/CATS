@@ -2,4 +2,4 @@
     import { Video } from 'flowbite-svelte';
 </script>
 
-<Video src='https://github.com/A-very-Cunning-ham/CATS/blob/ui-fixes/meow/src/lib/images/video/WGI_0010.AVI' controls trackSrc='WGI_0010.AVI' />
+<Video src='\src\lib\images\video\WGI_0010.mp4' controls autoplay loop type="video/mp4" class="w-full max-w-full h-auto px-12"/>
