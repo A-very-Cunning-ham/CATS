@@ -8,6 +8,7 @@
 	import { invalidateAll } from '$app/navigation';
 	import { DateInput } from 'date-picker-svelte';
 	export let data: PageData
+	import { ExportToCsv } from 'export-to-csv';
 
 	function restart() {
 		invalidateAll();
@@ -183,6 +184,22 @@
 		
 	}
 
+	function export_csv() {
+		const csvExporter = new ExportToCsv({
+			filename: 'Cats' + new Date(),
+			fieldSeparator: ',',
+			quoteStrings: '"',
+			decimalSeparator: '.',
+			showLabels: true,
+			showTitle: true,
+			title: 'Cats',
+			useTextFile: false,
+			useBom: true,
+			useKeysAsHeaders: true,
+		});
+
+		csvExporter.generateCsv(data1);
+	}
 </script>
 
 <svelte:head>
@@ -196,7 +213,7 @@
 	<Button class="w-32 self-center no-underline" on:click={restart}>Load New Data</Button>
 	<span class="flex flex-col justify-center items-center py-6">
 		<p class="font-semibold text-2xl">
-			Site {images_perm.images[0].site}
+			Site {images_perm.images[0].camera}
 		</p>
 		<p class="text-xl">
 			Cats detected (per day)
@@ -209,7 +226,8 @@
 
 		<Chart data={data1} type="bar" bind:this={chartRef}/>
 	<span class="flex flex-col justify-center items-center py-6">
-		<Button class="w-16" on:click={onExport}>Export</Button>
+		<Button class="w-16" on:click={onExport}>Export Graph</Button>
+		<Button class="w-16" on:click={export_csv}>Export CSV</Button>
 	</span>
 
 		<!-- <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>

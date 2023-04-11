@@ -3,7 +3,7 @@
 	import { isAuthenticated, user } from '$lib/stores/store';
 	import { Button, Card, Checkbox, Dropdown, Modal, Search, Label, Input, Select, Helper } from 'flowbite-svelte';
 	import Video from './Video.svelte';
-	import type { PageData } from './$types';
+	import type { Action, Actions, PageData } from './$types';
 	export let data: PageData
 	import { invalidateAll } from '$app/navigation';
 	
@@ -126,7 +126,7 @@
 			{/each}
 			</ul>
 			<Modal title="New Cat Registration" bind:open={newCatModal} autoclose size="lg">
-				<form class="flex flex-col space-y-6" on:submit|preventDefault={addNewCat}>
+				<form class="flex flex-col space-y-6" on:submit|preventDefault>
 					<!-- <h3 class="text-xl font-medium text-gray-900 dark:text-white p-0">Sign in to our platform</h3> -->
 					<Label class="space-y-2 text-xl">
 						<span>Name</span>

@@ -9,6 +9,4 @@ export function start_mongo() {
 	return client.connect();
 }
 
-export const insert = client.db('mongodbVSCodePlaygroundDB').collection('images')
-
 export default client.db('mongodbVSCodePlaygroundDB')
