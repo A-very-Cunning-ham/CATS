@@ -287,7 +287,7 @@
 				<TableBodyCell>08</TableBodyCell>
 				<TableBodyCell>08/08</TableBodyCell>
 				<TableBodyCell>07/08</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>03-05-2023</TableBodyCell>
@@ -295,7 +295,7 @@
 				<TableBodyCell>12</TableBodyCell>
 				<TableBodyCell>08/12</TableBodyCell>
 				<TableBodyCell>07/12</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>03-04-2023</TableBodyCell>
@@ -303,7 +303,7 @@
 				<TableBodyCell>10</TableBodyCell>
 				<TableBodyCell>07/10</TableBodyCell>
 				<TableBodyCell>05/10</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>03-03-2023</TableBodyCell>
@@ -311,7 +311,7 @@
 				<TableBodyCell>11</TableBodyCell>
 				<TableBodyCell>07/11</TableBodyCell>
 				<TableBodyCell>06/11</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>03-02-2023</TableBodyCell>
@@ -319,7 +319,7 @@
 				<TableBodyCell>12</TableBodyCell>
 				<TableBodyCell>05/12</TableBodyCell>
 				<TableBodyCell>05/12</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>03-01-2023</TableBodyCell>
@@ -327,7 +327,7 @@
 				<TableBodyCell>07</TableBodyCell>
 				<TableBodyCell>05/07</TableBodyCell>
 				<TableBodyCell>03/07</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>02-28-2023</TableBodyCell>
@@ -335,7 +335,7 @@
 				<TableBodyCell>10</TableBodyCell>
 				<TableBodyCell>04/10</TableBodyCell>
 				<TableBodyCell>04/10</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>02-27-2023</TableBodyCell>
@@ -343,7 +343,7 @@
 				<TableBodyCell>09</TableBodyCell>
 				<TableBodyCell>03/09</TableBodyCell>
 				<TableBodyCell>04/09</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			</TableBody>
 		  </Table>

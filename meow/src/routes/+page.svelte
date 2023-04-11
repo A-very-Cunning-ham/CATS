@@ -2,10 +2,11 @@
 	import {onMount} from 'svelte';
 	import { isAuthenticated, user } from '$lib/stores/store';
 	import { Button, Card, Checkbox, Dropdown, Modal, Search, Label, Input, Select, Helper } from 'flowbite-svelte';
-	import Video from './Video.svelte';
+	// import Video from './Video.svelte';
 	import type { Action, Actions, PageData } from './$types';
 	export let data: PageData
 	import { invalidateAll } from '$app/navigation';
+	import { enhance } from '$app/forms';
 	
 	var dateFromObjectId = function (objectId) {
 		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
@@ -35,19 +36,19 @@
 		invalidateAll();
 	}
 
-	async function addNewCat(e){
-		const formData = new FormData(e.target);
+	// async function addNewCat(e){
+	// 	const formData = new FormData(e.target);
 
-		const data = {};
+	// 	const data = {};
 		
-		for (let field of formData) {
-			const [key, value] = field;
-			data[key] = value;
-		}
+	// 	for (let field of formData) {
+	// 		const [key, value] = field;
+	// 		data[key] = value;
+	// 	}
 		
-		const result = await images.insertOne(e)
-		return result
-	}
+	// 	const result = await images.insertOne(e)
+	// 	return result
+	// }
   
 </script>
 
@@ -62,13 +63,13 @@
 	<h1 class="mt-5">C.A.T.S.</h1>
 	<h1 class="mb-5">Camera Assisted Tracking System</h1>
 
-	<div class="flex flex-col items-center mb-5">	
+	<!-- <div class="flex flex-col items-center mb-5">	
 		<h5 class="mb-6 text-2xl font-bold tracking-tight text-gray-900">Live Video Feed</h5>
 		<Video/>
-	</div>
+	</div> -->
 	<div class="flex flex-col items-center">	
 		<h5 class="mb-6 text-2xl font-bold tracking-tight text-gray-900">Recent Events</h5>
-		<Button class="w-32 self-center no-underline" on:click={restart}>Load New Images</Button>
+		<!-- <Button class="w-32 self-center no-underline" on:click={restart}>Load New Images</Button> -->
 		<div>
 			___________________________
 		</div>
@@ -125,8 +126,8 @@
 			{/if}
 			{/each}
 			</ul>
-			<Modal title="New Cat Registration" bind:open={newCatModal} autoclose size="lg">
-				<form class="flex flex-col space-y-6" on:submit|preventDefault>
+			<Modal title="New Cat Registration" bind:open={newCatModal} size="lg">
+				<form class="flex flex-col space-y-6" method="POST" use:enhance>
 					<!-- <h3 class="text-xl font-medium text-gray-900 dark:text-white p-0">Sign in to our platform</h3> -->
 					<Label class="space-y-2 text-xl">
 						<span>Name</span>
@@ -146,9 +147,9 @@
 						</Label>
 						<Label class="space-y-2 text-xl">
 							<span>Eartipped?</span>
-							<Select class="mt-2 border-none" items={options} bind:value={selected} required/></Label>
+							<Select class="mt-2 border-none" name="neutered" items={options} bind:value={selected} required/></Label>
 					</div>
-					<Button type="submit" on:click={()=> newCatModal=false}>Submit</Button>
+					<Button type="submit">Submit</Button>
 					<div class="text-sm font-medium text-gray-500 dark:text-gray-300">
 						Leave fields blank if unsure.
 					</div>

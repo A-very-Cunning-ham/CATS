@@ -5,15 +5,19 @@ import images from "$lib/images";
 import type {PageServerLoad, Actions} from './$types';
 
 export const actions: Actions = { 
-	create: async ({ request }) => {
+	default: async ({ request }) => {
 		const formData = await request.formData();
-		
+		console.log(formData)
 		const data = {};
 
 		for (let field of formData) {
 			const [key, value] = field;
 			data[key] = value;
 		}
+
+		data["type"] = "cat"
+		data["events"] = []
+
 
 		const result = await images.insertOne(data);
 	
