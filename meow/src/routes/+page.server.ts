@@ -6,9 +6,7 @@ import type {PageServerLoad} from './$types';
 
 export const load: PageServerLoad = async function() {
 	const data = await images.find({}).sort({_id: -1}).toArray();
-	const data2 = await cats.find({}).sort({_id: -1}).toArray();
 	return {
-		images: JSON.parse(JSON.stringify(data)),
-		cats: JSON.parse(JSON.stringify(data2))
+		images: JSON.parse(JSON.stringify(data)) 
 	}
 }

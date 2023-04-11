@@ -6,12 +6,13 @@
 	import type { PageData } from './$types';
 	export let data: PageData
 	import { invalidateAll } from '$app/navigation';
+	import { MongoClient } from 'mongodb';
 	
 	var dateFromObjectId = function (objectId) {
 		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
 	};
 
-	$: ({images, cats} = data)
+	$: ({images} = data)
 	
 	function addNewCat() {
 		// add new cat
@@ -65,6 +66,7 @@
 		<div id="list">
 			<ul class="grid grid-cols-2 gap-6">
 			{#each images as image}
+			{#if image['type'] == 'image'}
 			<li>
 				<Card class="flex flex-col gap-6 justify-between self-center content-center p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 hover:no-underline min-h-full">
 				<img src="{image.path}" alt="Cat!" class="object-cover max-h-64"/>
@@ -89,15 +91,11 @@
 								<div slot="header" class="p-3">
 									<Search size="md"/>
 								</div>
-								{#each cats as cat}
-								{#if image._id in cat.events}
-									<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
-									<Checkbox checked>{cat.name}</Checkbox>
-									</li>
-								{:else}
-									<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
-										<Checkbox>{cat.name}</Checkbox>
-									</li>
+								{#each images as image}
+								{#if image['type'] == 'cat'}
+								<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								  <Checkbox>{image.name}</Checkbox>
+								</li>
 								{/if}
 								{/each}
 								<a slot="footer" on:click={()=>newCatModal=true} class="flex items-center p-3 -mb-1 text-sm font-medium text-green-600 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-red-500 hover:underline">
@@ -115,6 +113,7 @@
 				</Modal>	
 				</Card>
 			</li>
+			{/if}
 			{/each}
 			</ul>
 			<Modal title="New Cat Registration" bind:open={newCatModal} autoclose size="lg">
