@@ -45,6 +45,11 @@
 	// $: innerWidth = width - (padding.left + padding.right);
 	// $: barWidth = innerWidth / xTicks.length;
 
+	let dateRanger1 = new Date(new Date().setDate(new Date().getDate() - 7))
+	dateRanger1.setHours(0,0,0)
+	let dateRanger2 = new Date()
+	dateRanger2.setHours(23,59,59)
+
 	$: ({images} = data)
 
 	let images_perm = data
@@ -67,14 +72,14 @@
 
 	days.reverse()
 
-	let start_date = days[0]
+	let start_date = dateRanger1
 	
 	console.log("Days with cats: ")
 	console.log(days)
 
 	let days_graph: Date[] = []
 
-	while (start_date <= days[days.length - 1]) {
+	while (start_date <= dateRanger2) {
 		days_graph.push(new Date(start_date))
 		start_date.setDate(start_date.getDate() + 1)
 	}
@@ -120,9 +125,63 @@
 
 	let files;
 
-	let dateRanger1 = new Date()
-	let dateRanger2 = new Date()
+	function updateRange() {
+		console.log("Updating range")
+		console.log(dateRanger1)
+		console.log(dateRanger2)
 
+		let start_date = dateRanger1
+	
+		console.log("Days with cats: ")
+		console.log(days)
+
+		let days_graph: Date[] = []
+
+		while (start_date <= dateRanger2) {
+			days_graph.push(new Date(start_date))
+			start_date.setDate(start_date.getDate() + 1)
+		}
+
+		let days_graph_string: String[] = []
+		
+		for(let x: number = 0; x < days_graph.length; x++){
+			days_graph_string.push(days_graph[x].toLocaleString().split(',')[0])
+		}
+
+		console.log("Days on graph")
+
+		console.log(days_graph)
+
+		let cat_days = [new Array(days_graph.length).fill(0), days_graph]
+
+		for(let i: number = 0; i < cat_days[0].length; i++){
+			for(let j: number = 0; j < days.length; j++){
+				if(datesAreOnSameDay(days[j], cat_days[1][i])){
+					cat_days[0][i] += 1
+				}
+			}
+		}
+
+		console.log(cat_days)
+		
+		//console.log(images_perm.images)
+		let chartRef;
+
+		const onExport = () => chartRef.exportChart();
+
+		data1 = {
+		axisOptions: {
+			xAxisMode: 'tick' // default: 'span'
+		},
+		labels: days_graph_string,
+		datasets: [
+			{
+			values: cat_days[0]
+			}
+		]
+		};
+		
+	}
 
 </script>
 
@@ -137,13 +196,15 @@
 	<Button class="w-32 self-center no-underline" on:click={restart}>Load New Data</Button>
 	<span class="flex flex-col justify-center items-center py-6">
 		<p class="font-semibold text-2xl">
-			Site 1
+			Site {images_perm.images[0].site}
 		</p>
 		<p class="text-xl">
 			Cats detected (per day)
 		</p>
 		Start Date <DateInput bind:value={dateRanger1} />
 		End Date <DateInput bind:value={dateRanger2} />
+		<br>
+		<Button class="w-32 self-center no-underline" on:click={updateRange}>Update Range</Button>
 	</span>
 
 		<Chart data={data1} type="bar" bind:this={chartRef}/>
