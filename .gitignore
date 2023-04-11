@@ -133,3 +133,7 @@ images
 data
 
 letsencrypt/credentials
+
+models
+utils
+*.pt

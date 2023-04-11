@@ -1,5 +1,8 @@
 <script>
 	import { Card, Button } from 'flowbite-svelte';
+	import icon1 from '$lib/images/icons/users.png';
+	import icon2 from '$lib/images/icons/home.png';
+	import icon3 from '$lib/images/icons/id-card.png';
 </script>
 
 <svelte:head>
@@ -8,141 +11,28 @@
 </svelte:head>
 
 <section>
-    <h1 class="font-semibold py-6">Pricing Options</h1>
-	<br/>
-	<div class="flex flex-row justify-center gap-5">
-		<Card padding="xl">
-			<h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Basic plan</h5>
-			<div class="flex items-baseline text-gray-900 dark:text-white">
-				<span class="text-3xl font-semibold">$</span>
-				<span class="text-5xl font-extrabold tracking-tight">350</span>
-				<span class="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">/month</span>
-			</div>
-			<ul class="my-7 space-y-4">
-				<li class="flex space-x-2">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">5 cameras</span>
-				</li>
-				<li class="flex space-x-2">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Hardware Installation</span>
-				</li>
-				<li class="flex space-x-2">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-				  <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Snapshot Capture and Download</span>
-			  	</li>
-				<li class="flex space-x-2">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Email & Mobile Alerts</span>
-				</li>
-				<li class="flex space-x-2 line-through decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">Video History for up to 180 Days</span>
-				</li>
-				<li class="flex space-x-2 line-through decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">Extended Warranty for all Cameras</span>
-				</li>
-				<li class="flex space-x-2 line-through decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">10% off select CATS merchandise</span>
-				</li>
-				<li class="flex space-x-2 line-through decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
-				</li>
-			</ul>
-			<Button class="w-full" href="/">Choose plan</Button>
-		  </Card>
+    <h1 class="font-semibold p-6">Pricing</h1>
+	<h1 class="mt-10">Tell us more about yourself</h1>
+	<h1>I am a...</h1>
 
-		  <Card padding="xl">
-			<h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Standard plan</h5>
-			<div class="flex items-baseline text-gray-900 dark:text-white">
-				<span class="text-3xl font-semibold">$</span>
-				<span class="text-5xl font-extrabold tracking-tight">835</span>
-				<span class="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">/month</span>
+	<div class="flex flex-row justify-center gap-5 p-10">
+		<Card padding="xl" class="flex-1 hover:no-underline" href="/pricing/volunteer">
+			<div class="flex flex-col items-center">
+				<img src={icon1} class="w-10 h-10 object-contain" alt="persons"/>
+				<h5 class="text-xl font-medium text-gray-500 dark:text-gray-400">Volunteer</h5>
 			</div>
-			<!-- List -->
-			<ul class="my-7 space-y-4">
-				<li class="flex space-x-2">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">10 cameras</span>
-				</li>
-				<li class="flex space-x-2">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Hardware Installation</span>
-				</li>
-				<li class="flex space-x-2">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-				  <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Snapshot Capture and Download</span>
-			  	</li>
-				<li class="flex space-x-2">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Email & Mobile Alerts</span>
-				</li>
-				<li class="flex space-x-2 decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">Video History for up to 180 Days</span>
-				</li>
-				<li class="flex space-x-2 decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">Extended Warranty for all Cameras</span>
-				</li>
-				<li class="flex space-x-2 line-through decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">10% off select CATS merchandise</span>
-				</li>
-				<li class="flex space-x-2 line-through decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
-				</li>
-			</ul>
-			<Button class="w-full" href="/">Choose plan</Button>
-		  </Card>
-
-		  <Card padding="xl">
-			<h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Premium plan</h5>
-			<div class="flex items-baseline text-gray-900 dark:text-white">
-				<span class="text-3xl font-semibold">$</span>
-				<span class="text-5xl font-extrabold tracking-tight">1149</span>
-				<span class="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">/month</span>
+		</Card>
+		<Card padding="xl" class="flex-1 hover:no-underline" href="/pricing/TNR">
+			<div class="flex flex-col items-center">
+				<img src={icon2} class="w-10 h-10 object-contain" alt="persons"/>
+				<h5 class="text-xl font-medium text-gray-500 dark:text-gray-400">TNR Program</h5>
 			</div>
-			<!-- List -->
-			<ul class="my-7 space-y-4">
-				<li class="flex space-x-2">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Up to 20 cameras</span>
-				</li>
-				<li class="flex space-x-2">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Hardware Installation</span>
-				</li>
-				<li class="flex space-x-2">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-				  <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Snapshot Capture and Download</span>
-			  	</li>
-				<li class="flex space-x-2">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">Email & Mobile Alerts</span>
-				</li>
-				<li class="flex space-x-2 decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">Video History for up to 180 Days</span>
-				</li>
-				<li class="flex space-x-2 decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">Extended Warranty for all Cameras</span>
-				</li>
-				<li class="flex space-x-2 decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">10% off select CATS merchandise</span>
-				</li>
-				<li class="flex space-x-2 decoration-gray-500">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span class="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
-				</li>
-			</ul>
-			<Button class="w-full" href="/">Choose plan</Button>
-		  </Card>
+		</Card>
+		<Card padding="xl" class="flex-1 hover:no-underline" href="/pricing/gov">
+			<div class="flex flex-col items-center">
+				<img src={icon3} class="w-10 h-10 object-contain" alt="persons"/>
+				<h5 class="text-xl font-medium text-gray-500 dark:text-gray-400">Local Goverment</h5>
+			</div>
+		</Card>
 	</div>
 </section>

@@ -2,10 +2,11 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/meow.png';
 	import profile from '$lib/images/profile.png';
-	import { Dropdown, DropdownItem } from 'flowbite-svelte'
+	import { Dropdown, DropdownItem, Toast } from 'flowbite-svelte'
 	import auth from '$lib/services/authService'
 	import { isAuthenticated, user } from '$lib/stores/store'
 	import { onMount } from 'svelte'
+	import notif from '$lib/images/icons/notif.png'
 	
 	let auth0Client = {}
 	
@@ -46,11 +47,11 @@
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Overview</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/graphs' ? 'page' : undefined}>
-				<a href="/graphs">Graphs</a>
-			</li>
 			<li aria-current={$page.url.pathname === '/analytics' ? 'page' : undefined}>
 				<a href="/analytics">Analytics</a>
+			</li>
+			<li aria-current={$page.url.pathname === '/your-cats' ? 'page' : undefined}>
+				<a href="/your-cats">Cats</a>
 			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
@@ -97,7 +98,17 @@
 		<div class="p-2">
 			<button type="button" class="btn-invis" disabled>Log In</button>
 		</div>
-	
+		<div class="w-12 h-12">
+			<button class="flex items-center justify-center w-full h-full">
+				<img src={notif} alt="bell" class="w-7 h-7 object-contain"/>
+				<Dropdown class="w-full">
+					<Toast>Dismissable User Notification.</Toast>
+					<Toast>NEW CAT DETECTED</Toast>
+					<Toast>Avery detected on Hudson</Toast>
+					<Toast>Something happened.</Toast>
+				</Dropdown>
+		</button>
+		</div>
 		<div class="w-12 h-12">
 			<button id="profile-icon" class="flex items-center justify-center w-full h-full">
 				<img src={profile} alt="Profile" class="w-8 h-8 object-contain"/>

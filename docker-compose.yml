@@ -3,7 +3,7 @@ version: "3.8"
 services:
   mongodb:
     image: mongo:4.4.18
-    restart: unless-stopped
+    # restart: unless-stopped
     env_file: ./.env
     environment:
       - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
@@ -12,12 +12,13 @@ services:
       - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
     volumes:
       - db:/data/db
+    command: --quiet
 
   app:
     depends_on:
       - mongodb
     build: ./meow
-    restart: unless-stopped
+    # restart: unless-stopped
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
@@ -38,7 +39,10 @@ services:
   purr:
     depends_on:
       - mongodb
-    build: ./purr
+    build: 
+      context: ./purr
+      dockerfile: Dockerfile.yolo.cpu
+
     restart: unless-stopped
     env_file: ./.env
     # ports:
@@ -54,6 +58,7 @@ services:
     volumes:
       - ./images:/images
 
+
   mosquitto:
     image: eclipse-mosquitto:2
     # network_mode: host
@@ -63,6 +68,7 @@ services:
       - ./mosquitto/log:/mosquitto/log/
     ports:
       - "1883:1883"
+    restart: unless-stopped
 
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
@@ -94,6 +100,12 @@ services:
 # this creates the database files in the project directory
 volumes:
   db:
+    driver: local
+    driver_opts:
+      type: none
+      device: "./data"
+      o: bind
+  db2:
     driver: local
     driver_opts:
       type: none

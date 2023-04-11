@@ -1,0 +1,11 @@
+[Unit]
+Description=Ensure stream starts on boot
+After=network-online.target
+Wants=network-online.target
+[Service]
+ExecStart=/bin/sh -c "libcamera-vid --width 1296 --height 1272 -t 0 --inline -n -o - | cvlc --intf dummy stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554/stream1}' :demux=h264"
+User=catnip
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target
