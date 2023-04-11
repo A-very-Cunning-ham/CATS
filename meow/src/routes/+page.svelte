@@ -1,18 +1,19 @@
 <script lang='ts'>
 	import {onMount} from 'svelte';
 	import { isAuthenticated, user } from '$lib/stores/store';
-	import { Button, Card, Carousel, CarouselTransition } from 'flowbite-svelte';
-
+	import { Button, Card, Checkbox, Dropdown, Modal, Search, Carousel, CarouselTransition } from 'flowbite-svelte';
+	import Video from './VIdeo.svelte';
 	import type { PageData } from './$types';
-
 	export let data: PageData
-
+	
 	var dateFromObjectId = function (objectId) {
 	return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
 	};
 
 	$: ({images} = data)
-
+	
+	let open = false;
+	let imagesrc;
 </script>
 
 <svelte:head>
@@ -25,25 +26,64 @@
 <section class= "flex flex-col self-center">
 	<h1 class="mt-5">C.A.T.S.</h1>
 	<h1 class="mb-5">Camera Assisted Tracking System</h1>
-	
+
+	<div class="flex flex-col items-center mb-5">	
+		<h5 class="mb-6 text-2xl font-bold tracking-tight text-gray-900">Live Video Feed</h5>
+		<Video/>
+	</div>
 	<div class="flex flex-col items-center">	
 		<h5 class="mb-6 text-2xl font-bold tracking-tight text-gray-900">Recent Events</h5>
 		<div id="list">
 			<ul class="grid grid-cols-2 gap-6">
 			{#each images as image}
-			<li class="flex flex-col gap-6 justify-between block self-center content-center p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 min-h-full">
-				<!-- <img src="{image.path}" alt="Cat!" /> -->
-				<img src="{image.path}" alt="Cat!" class="object-cover"/>
+			<li>
+				<Card class="flex flex-col gap-6 justify-between self-center content-center p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 hover:no-underline min-h-full">
+				<img src="{image.path}" alt="Cat!" class="object-cover max-h-64"/>
 				<div>
-					<h6 class="font-bold">Time Detected: </h6>{dateFromObjectId(image._id)}
-					<div class="flex flex-row gap-2">
+					<h6 class="font-bold">Time Detected: </h6>
+					<h6>{dateFromObjectId(image._id)}</h6>
+					<div class="flex gap-2">
 					<h6 class="font-bold"> Detected Object: </h6>
 					<h6> {image['object-detected']} </h6>
 					</div>
 				</div>
+				<Button on:click={() => {imagesrc=image.path; open = true}}>Review Image</Button>
+				<Modal title="Manual Tagging" size="xl" imageFromData={imagesrc} bind:open={open}>
+					<div class="flex gap-4">
+						<img src={imagesrc} alt="Cat!" class="object-cover max-h-64"/>
+						<div class="flex flex-col gap-4">
+							<p>Detected Cats: 1</p>
+							<p>Recognized: 0</p>
+							<p>Unrecognized: 1</p>
+							<Button >Tag</Button>
+							<Dropdown class="p-3 space-y-1 text-sm overflow-y-auto h-48">
+								<div slot="header" class="p-3">
+									<Search size="md"/>
+								</div>
+								{#each images as image2}
+								<!-- TODO: if found in image, add checked attribute to Checkbox -->
+								<li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+								  <Checkbox>{image2._id}</Checkbox>
+								</li>
+								{/each}
+								<a slot="footer" href="/your-cats" class="flex items-center p-3 -mb-1 text-sm font-medium text-green-600 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-red-500 hover:underline">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" /></svg>
+									Add New Cat
+								</a>
+							</Dropdown>
+						</div>	
+					</div>
+	
+					<svelte:fragment slot='footer'>
+						<Button on:click={()=> open=false}>Save Changes</Button>
+						<Button color="alternative" on:click={()=> open=false}>Discard Changes</Button>
+					</svelte:fragment>
+				</Modal>	
+				</Card>
 			</li>
 			{/each}
 			</ul>
+			
 		</div> 
 	</div>
 </section>
