@@ -6,7 +6,8 @@ const config: UserConfig = {
 	server: {
         host: true,
         port: 8080
-    }
+    },
+    ssr: { noExternal: ['svelte-image-gallery'] }
 };
 
 export default config;

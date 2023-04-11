@@ -130,6 +130,9 @@ dist
 .pnp.*
 
 data
+
+letsencrypt/credentials
+
 models
 utils
 *.pt
