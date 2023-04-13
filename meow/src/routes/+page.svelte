@@ -88,7 +88,7 @@
 					<h6> {image['object-detected']} </h6>
 					</div>
 				</div>
-				<Button on:click={() => {imagesrc=image.path; open = true}}>Review Image</Button>
+				<Button on:click={() => {imagesrc=`images/${image.filename}`; open = true}}>Review Image</Button>
 				<Modal title="Manual Tagging" size="xl" imageFromData={imagesrc} bind:open={open}>
 					<div class="flex gap-4">
 						<img src={imagesrc} alt="Cat!" class="object-cover max-h-64"/>

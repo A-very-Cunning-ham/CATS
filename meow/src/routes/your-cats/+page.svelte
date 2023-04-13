@@ -7,7 +7,7 @@
 	
 	
 	var dateFromObjectId = function (objectId) {
-		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
+		return new Date(parseInt(objectId.toString().substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
 	};
 
 	$: ({images} = data)
@@ -59,7 +59,13 @@
 			{#each images as image}
 				<TableBodyRow>
 				<TableBodyCell>{image.name}</TableBodyCell>
-				<TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell>
+				
+				{#if image.events[0]}
+					<TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell>
+				{:else}
+					<TableBodyCell>-</TableBodyCell>
+				{/if}
+
 				<TableBodyCell>{image.age}</TableBodyCell>
 				<TableBodyCell>{image.weight}</TableBodyCell>
 				<TableBodyCell>{image.neutered}</TableBodyCell>
@@ -87,7 +93,13 @@
 				<TableBodyRow>
 				<TableBodyCell><Checkbox /></TableBodyCell>
 				<TableBodyCell>{image.name}</TableBodyCell>
+				<!-- <TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell> -->
+
+				{#if image.events[0]}
 				<TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell>
+			{:else}
+				<TableBodyCell>-</TableBodyCell>
+			{/if}
 				<TableBodyCell>{image.age}</TableBodyCell>
 				<TableBodyCell>{image.weight}</TableBodyCell>
 				<TableBodyCell>{image.neutered}</TableBodyCell>

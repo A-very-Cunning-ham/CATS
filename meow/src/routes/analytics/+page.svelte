@@ -227,7 +227,7 @@
 		<Chart data={data1} type="bar" bind:this={chartRef}/>
 	<span class="flex flex-col justify-center items-center py-6">
 		<Button class="w-16" on:click={onExport}>Export Graph</Button>
-		<Button class="w-16" on:click={export_csv}>Export CSV</Button>
+		<!-- <Button class="w-16" on:click={export_csv}>Export CSV</Button> -->
 	</span>
 
 		<!-- <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
