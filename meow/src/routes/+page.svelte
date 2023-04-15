@@ -5,12 +5,8 @@
 	// import Video from './Video.svelte';
 	import type { Action, Actions, PageData } from './$types';
 	export let data: PageData
-	import { invalidateAll } from '$app/navigation';
 	import { enhance } from '$app/forms';
-	
-	var dateFromObjectId = function (objectId) {
-		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
-	};
+	import { dateFromObjectId, restart } from './Utilities';
 
 	$: ({images} = data)
 
@@ -30,25 +26,6 @@
 		{value:"N", name:"No"},
 		{value:"-", name:"Unsure"},
 	]
-
-	function restart() {
-		//unique = {} // every {} is unique, {} === {} evaluates to false
-		invalidateAll();
-	}
-
-	// async function addNewCat(e){
-	// 	const formData = new FormData(e.target);
-
-	// 	const data = {};
-		
-	// 	for (let field of formData) {
-	// 		const [key, value] = field;
-	// 		data[key] = value;
-	// 	}
-		
-	// 	const result = await images.insertOne(e)
-	// 	return result
-	// }
   
 </script>
 

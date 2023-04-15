@@ -3,6 +3,7 @@
 //export const prerender = false;
 import images from "$lib/images";
 import type {PageServerLoad, Actions} from './$types';
+import { load_cats } from './Utilities';
 
 export const actions: Actions = { 
 	default: async ({ request }) => {
@@ -18,30 +19,14 @@ export const actions: Actions = {
 		data["type"] = "cat"
 		data["events"] = []
 
-
 		const result = await images.insertOne(data);
 	
 		console.log('New cat added: ', data['name']);
 		return {
 		  success: true,
+		  data: result
 		};
 	  }
-	//   update: async ({ request }) => {
-	// 	const formData = await request.formData();
-	// 	const todoId = formData.get('todoId');
-	// 	const todoName = formData.get('todoName');
-	// 	await dbConnect();
-	// 	await TodoModel.findByIdAndUpdate(todoId, {
-	// 	  title: todoName,
-	// 	}).lean();
-	// 	await dbDisconnect();
-	
-	// 	console.log('Todo updated: ', todoId);
-	
-	// 	return {
-	// 	  success: true,
-	// 	};
-	//   }
 }
 
 export const load: PageServerLoad = async function() {
