@@ -2,21 +2,13 @@
 	import {onMount} from 'svelte';
 	import { isAuthenticated, user } from '$lib/stores/store';
 	import { Button, Card, Checkbox, Dropdown, Modal, Search, Label, Input, Select, Helper } from 'flowbite-svelte';
-	import Video from './Video.svelte';
-	import type { PageData } from './$types';
+	// import Video from './Video.svelte';
+	import type { Action, Actions, PageData } from './$types';
 	export let data: PageData
-	import { invalidateAll } from '$app/navigation';
-	import { MongoClient } from 'mongodb';
-	
-	var dateFromObjectId = function (objectId) {
-		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
-	};
+	import { enhance } from '$app/forms';
+	import { dateFromObjectId, restart } from './Utilities';
 
 	$: ({images} = data)
-	
-	function addNewCat() {
-		// add new cat
-	}
 
 	let detectedCats = 1;
 	let recognized = 0;
@@ -34,11 +26,6 @@
 		{value:"N", name:"No"},
 		{value:"-", name:"Unsure"},
 	]
-
-	function restart() {
-		//unique = {} // every {} is unique, {} === {} evaluates to false
-		invalidateAll();
-	}
   
 </script>
 
@@ -53,13 +40,13 @@
 	<h1 class="mt-5">C.A.T.S.</h1>
 	<h1 class="mb-5">Camera Assisted Tracking System</h1>
 
-	<div class="flex flex-col items-center mb-5">	
+	<!-- <div class="flex flex-col items-center mb-5">	
 		<h5 class="mb-6 text-2xl font-bold tracking-tight text-gray-900">Live Video Feed</h5>
 		<Video/>
-	</div>
+	</div> -->
 	<div class="flex flex-col items-center">	
 		<h5 class="mb-6 text-2xl font-bold tracking-tight text-gray-900">Recent Events</h5>
-		<Button class="w-32 self-center no-underline" on:click={restart}>Load New Images</Button>
+		<!-- <Button class="w-32 self-center no-underline" on:click={restart}>Load New Images</Button> -->
 		<div>
 			___________________________
 		</div>
@@ -78,7 +65,7 @@
 					<h6> {image['object-detected']} </h6>
 					</div>
 				</div>
-				<Button on:click={() => {imagesrc=image.path; open = true}}>Review Image</Button>
+				<Button on:click={() => {imagesrc=`images/${image.filename}`; open = true}}>Review Image</Button>
 				<Modal title="Manual Tagging" size="xl" imageFromData={imagesrc} bind:open={open}>
 					<div class="flex gap-4">
 						<img src={imagesrc} alt="Cat!" class="object-cover max-h-64"/>
@@ -116,30 +103,30 @@
 			{/if}
 			{/each}
 			</ul>
-			<Modal title="New Cat Registration" bind:open={newCatModal} autoclose size="lg">
-				<form class="flex flex-col space-y-6" action="#">
+			<Modal title="New Cat Registration" bind:open={newCatModal} size="lg">
+				<form class="flex flex-col space-y-6" method="POST" use:enhance>
 					<!-- <h3 class="text-xl font-medium text-gray-900 dark:text-white p-0">Sign in to our platform</h3> -->
 					<Label class="space-y-2 text-xl">
 						<span>Name</span>
-						<Input name="name" placeholder="Oreo" required />
+						<Input name="name" placeholder="Oreo" value="" required />
 					</Label>
 					
 					<div class="flex gap-6 justify-between">
 						<Label class="space-y-2 text-xl">
 							<span>Age</span>
-							<Input type="number" name="age" placeholder="24"/>
+							<Input type="number" name="age" value="" placeholder="24"/>
 							<Helper class="text-sm">Approximate age in months</Helper>
 						</Label>
 						<Label class="space-y-2 text-xl">
 							<span>Weight</span>
-							<Input type="number" name="weight" placeholder="5" />
+							<Input type="number" name="weight" value="" placeholder="5" />
 							<Helper class="text-sm">Weight in lbs</Helper>
 						</Label>
 						<Label class="space-y-2 text-xl">
 							<span>Eartipped?</span>
-							<Select class="mt-2 border-none" items={options} bind:value={selected} required/></Label>
+							<Select class="mt-2 border-none" name="neutered" items={options} bind:value={selected} required/></Label>
 					</div>
-					<Button type="submit" on:click={()=> newCatModal=false}>Submit</Button>
+					<Button type="submit">Submit</Button>
 					<div class="text-sm font-medium text-gray-500 dark:text-gray-300">
 						Leave fields blank if unsure.
 					</div>

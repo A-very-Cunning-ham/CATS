@@ -1,17 +1,17 @@
 <script lang='ts'>
 	import { Button, Helper, Label, Input, Modal, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch, Select } from 'flowbite-svelte';
+	import { cat } from '$lib/stores/store.js'
 	import type { PageData } from './$types';
 	export let data: PageData
 	import { invalidateAll } from '$app/navigation';
-	import { Button } from 'flowbite-svelte';
+	
 	
 	var dateFromObjectId = function (objectId) {
-		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
+		return new Date(parseInt(objectId.toString().substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
 	};
 
-	$: ({cats} = data)
+	$: ({images} = data)
 
-	console.log(cats);
 	
 	let newCatModal = false;
 	let editing = false;
@@ -39,7 +39,7 @@
     <div>
 		<h1>Your Cats</h1>
 		<div class="flex justify-center self-center">
-			<p>Camera 1</p>
+			<p>Camera {images[0].camera}</p>
 			<div></div>
 			
 		</div>
@@ -50,20 +50,26 @@
 			<TableHead>
 			  <TableHeadCell>Name/ID</TableHeadCell>
 			  <TableHeadCell>Date Last Seen</TableHeadCell>
-			  <TableHeadCell>Age</TableHeadCell>
-			  <TableHeadCell>Weight</TableHeadCell>
+			  <TableHeadCell>Age (in Months)</TableHeadCell>
+			  <TableHeadCell>Weight (in Pounds)</TableHeadCell>
 			  <TableHeadCell>Ear Tipped</TableHeadCell>	
 			  <TableHeadCell></TableHeadCell>		
 			</TableHead>
 			<TableBody >
-			{#each cats as cat}
+			{#each images as image}
 				<TableBodyRow>
-				<TableBodyCell>{cat.name}</TableBodyCell>
-				<TableBodyCell>{dateFromObjectId(cat.events[0])}</TableBodyCell>
-				<TableBodyCell>{cat.age}</TableBodyCell>
-				<TableBodyCell>{cat.weight}</TableBodyCell>
-				<TableBodyCell>{cat.eartipped}</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Details</a></TableBodyCell>
+				<TableBodyCell>{image.name}</TableBodyCell>
+				
+				{#if image.events[0]}
+					<TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell>
+				{:else}
+					<TableBodyCell>-</TableBodyCell>
+				{/if}
+
+				<TableBodyCell>{image.age}</TableBodyCell>
+				<TableBodyCell>{image.weight}</TableBodyCell>
+				<TableBodyCell>{image.neutered}</TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details" on:click={()=> cat.set(image)}>Details</a></TableBodyCell>
 			  </TableBodyRow>
 			  {/each}
 			</TableBody>
@@ -77,21 +83,27 @@
 				<TableHeadCell></TableHeadCell>
 				<TableHeadCell>Name/ID</TableHeadCell>
 				<TableHeadCell>Date Last Seen</TableHeadCell>
-				<TableHeadCell>Age</TableHeadCell>
-				<TableHeadCell>Weight</TableHeadCell>
+				<TableHeadCell>Age (in Months)</TableHeadCell>
+				<TableHeadCell>Weight (in Pounds)</TableHeadCell>
 				<TableHeadCell>Ear Tipped</TableHeadCell>	
 				<TableHeadCell></TableHeadCell>		
 			</TableHead>
 			<TableBody >
-			{#each cats as cat}
+			{#each images as image}
 				<TableBodyRow>
 				<TableBodyCell><Checkbox /></TableBodyCell>
-				<TableBodyCell>{cat.name}</TableBodyCell>
-				<TableBodyCell>{dateFromObjectId(cat.events[0])}</TableBodyCell>
-				<TableBodyCell>{cat.age}</TableBodyCell>
-				<TableBodyCell>{cat.weight}</TableBodyCell>
-				<TableBodyCell>{cat.eartipped}</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Details</a></TableBodyCell>
+				<TableBodyCell>{image.name}</TableBodyCell>
+				<!-- <TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell> -->
+
+				{#if image.events[0]}
+				<TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell>
+			{:else}
+				<TableBodyCell>-</TableBodyCell>
+			{/if}
+				<TableBodyCell>{image.age}</TableBodyCell>
+				<TableBodyCell>{image.weight}</TableBodyCell>
+				<TableBodyCell>{image.neutered}</TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details" on:click={()=>cat.set(image)}>Details</a></TableBodyCell>
 			  </TableBodyRow>
 			  {/each}
 			</TableBody>
