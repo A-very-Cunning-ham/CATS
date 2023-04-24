@@ -43,7 +43,7 @@
 			<div></div>
 			
 		</div>
-		<Button class="w-32 self-center no-underline" on:click={restart}>Load New Data</Button>
+		<Button class="mb-3 p-6 self-center no-underline" on:click={restart}>Load New Data</Button>
 		<br/>
 		{#if !editing}
 		<Table hoverable shadow>
@@ -94,7 +94,6 @@
 				<TableBodyCell><Checkbox /></TableBodyCell>
 				<TableBodyCell>{image.name}</TableBodyCell>
 				<!-- <TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell> -->
-
 				{#if image.events[0]}
 				<TableBodyCell>{dateFromObjectId(image.events[0])}</TableBodyCell>
 			{:else}

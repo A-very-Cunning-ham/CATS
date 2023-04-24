@@ -69,10 +69,7 @@
 	</div> -->
 	<div class="flex flex-col items-center">	
 		<h5 class="mb-6 text-2xl font-bold tracking-tight text-gray-900">Recent Events</h5>
-		<!-- <Button class="w-32 self-center no-underline" on:click={restart}>Load New Images</Button> -->
-		<div>
-			___________________________
-		</div>
+		<Button pill class="mb-6 self-center no-underline" on:click={restart}>Load New Images</Button>
 		<div id="list">
 			<ul class="grid grid-cols-2 gap-6">
 			{#each images as image}

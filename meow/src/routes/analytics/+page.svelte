@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Dropzone, Checkbox, TableSearch } from 'flowbite-svelte';
+	import { ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Dropzone, Checkbox, TableSearch } from 'flowbite-svelte';
 	import type { PageData } from './$types';
 	import { scaleBand } from 'd3-scale';
 	import { user } from '$lib/stores/store';
@@ -210,7 +210,6 @@
 <section class= "flex flex-col justify-center mb-12">
 
 	<h1 class="py-5">Welcome Back, {userInfo.given_name}!</h1>
-	<Button class="w-32 self-center no-underline" on:click={restart}>Load New Data</Button>
 	<span class="flex flex-col justify-center items-center py-6">
 		<p class="font-semibold text-2xl">
 			Site {images_perm.images[0].camera}
@@ -218,16 +217,25 @@
 		<p class="text-xl">
 			Cats detected (per day)
 		</p>
-		Start Date <DateInput bind:value={dateRanger1} />
-		End Date <DateInput bind:value={dateRanger2} />
-		<br>
-		<Button class="w-32 self-center no-underline" on:click={updateRange}>Update Range</Button>
 	</span>
 
 		<Chart data={data1} type="bar" bind:this={chartRef}/>
-	<span class="flex flex-col justify-center items-center py-6">
-		<Button class="w-16" on:click={onExport}>Export Graph</Button>
-		<!-- <Button class="w-16" on:click={export_csv}>Export CSV</Button> -->
+		<div class="flex gap-4 py-6 self-center">	
+			<div>
+			Start Date <DateInput bind:value={dateRanger1} />
+			</div>
+			<div>
+			End Date <DateInput bind:value={dateRanger2} />
+			</div>
+		</div>
+		<Button class="self-center no-underline" on:click={updateRange}>Update Range</Button>
+	
+	<span class="flex justify-center py-6">
+		<ButtonGroup class="space-x-px">
+		<Button class="self-center no-underline" color="blue" on:click={restart}>Load New Data</Button>
+		<Button class="" color="blue" on:click={onExport}>Export Graph</Button>
+		<Button class="" color="blue" on:click={export_csv}>Export CSV</Button>
+		</ButtonGroup>
 	</span>
 
 		<!-- <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
