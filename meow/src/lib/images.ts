@@ -1,4 +1,5 @@
 import db from '$lib/mongo'
 
-export const images = db.collection('images')
-export const cats = db.collection('cats')
+const images = db.collection('images')
+
+export default images

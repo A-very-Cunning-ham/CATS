@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Dropzone, Checkbox, TableSearch } from 'flowbite-svelte';
+	import { ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Dropzone, Checkbox, TableSearch } from 'flowbite-svelte';
 	import type { PageData } from './$types';
 	import { scaleBand } from 'd3-scale';
 	import { user } from '$lib/stores/store';
@@ -8,6 +8,7 @@
 	import { invalidateAll } from '$app/navigation';
 	import { DateInput } from 'date-picker-svelte';
 	export let data: PageData
+	import { ExportToCsv } from 'export-to-csv';
 
 	function restart() {
 		invalidateAll();
@@ -183,6 +184,22 @@
 		
 	}
 
+	function export_csv() {
+		const csvExporter = new ExportToCsv({
+			filename: 'Cats' + new Date(),
+			fieldSeparator: ',',
+			quoteStrings: '"',
+			decimalSeparator: '.',
+			showLabels: true,
+			showTitle: true,
+			title: 'Cats',
+			useTextFile: false,
+			useBom: true,
+			useKeysAsHeaders: true,
+		});
+
+		csvExporter.generateCsv(data1);
+	}
 </script>
 
 <svelte:head>
@@ -193,23 +210,32 @@
 <section class= "flex flex-col justify-center mb-12">
 
 	<h1 class="py-5">Welcome Back, {userInfo.given_name}!</h1>
-	<Button class="w-32 self-center no-underline" on:click={restart}>Load New Data</Button>
 	<span class="flex flex-col justify-center items-center py-6">
 		<p class="font-semibold text-2xl">
-			Site {images_perm.images[0].site}
+			Site {images_perm.images[0].camera}
 		</p>
 		<p class="text-xl">
 			Cats detected (per day)
 		</p>
-		Start Date <DateInput bind:value={dateRanger1} />
-		End Date <DateInput bind:value={dateRanger2} />
-		<br>
-		<Button class="w-32 self-center no-underline" on:click={updateRange}>Update Range</Button>
 	</span>
 
 		<Chart data={data1} type="bar" bind:this={chartRef}/>
-	<span class="flex flex-col justify-center items-center py-6">
-		<Button class="w-16" on:click={onExport}>Export</Button>
+		<div class="flex gap-4 py-6 self-center">	
+			<div>
+			Start Date <DateInput bind:value={dateRanger1} />
+			</div>
+			<div>
+			End Date <DateInput bind:value={dateRanger2} />
+			</div>
+		</div>
+		<Button class="self-center no-underline" on:click={updateRange}>Update Range</Button>
+	
+	<span class="flex justify-center py-6">
+		<ButtonGroup class="space-x-px">
+		<Button class="self-center no-underline" color="blue" on:click={restart}>Load New Data</Button>
+		<Button class="" color="blue" on:click={onExport}>Export Graph</Button>
+		<Button class="" color="blue" on:click={export_csv}>Export CSV</Button>
+		</ButtonGroup>
 	</span>
 
 		<!-- <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
@@ -269,7 +295,7 @@
 				<TableBodyCell>08</TableBodyCell>
 				<TableBodyCell>08/08</TableBodyCell>
 				<TableBodyCell>07/08</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>03-05-2023</TableBodyCell>
@@ -277,7 +303,7 @@
 				<TableBodyCell>12</TableBodyCell>
 				<TableBodyCell>08/12</TableBodyCell>
 				<TableBodyCell>07/12</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>03-04-2023</TableBodyCell>
@@ -285,7 +311,7 @@
 				<TableBodyCell>10</TableBodyCell>
 				<TableBodyCell>07/10</TableBodyCell>
 				<TableBodyCell>05/10</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>03-03-2023</TableBodyCell>
@@ -293,7 +319,7 @@
 				<TableBodyCell>11</TableBodyCell>
 				<TableBodyCell>07/11</TableBodyCell>
 				<TableBodyCell>06/11</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>03-02-2023</TableBodyCell>
@@ -301,7 +327,7 @@
 				<TableBodyCell>12</TableBodyCell>
 				<TableBodyCell>05/12</TableBodyCell>
 				<TableBodyCell>05/12</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>03-01-2023</TableBodyCell>
@@ -309,7 +335,7 @@
 				<TableBodyCell>07</TableBodyCell>
 				<TableBodyCell>05/07</TableBodyCell>
 				<TableBodyCell>03/07</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>02-28-2023</TableBodyCell>
@@ -317,7 +343,7 @@
 				<TableBodyCell>10</TableBodyCell>
 				<TableBodyCell>04/10</TableBodyCell>
 				<TableBodyCell>04/10</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  <TableBodyRow>
 				<TableBodyCell>02-27-2023</TableBodyCell>
@@ -325,7 +351,7 @@
 				<TableBodyCell>09</TableBodyCell>
 				<TableBodyCell>03/09</TableBodyCell>
 				<TableBodyCell>04/09</TableBodyCell>
-				<TableBodyCell><a href="/analytics/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			</TableBody>
 		  </Table>
