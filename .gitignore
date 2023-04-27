@@ -143,13 +143,14 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-<<<<<<< Updated upstream
 images
 data
+
+letsencrypt/credentials
+
 models
 utils
 *.pt
-=======
 
 # Github Python Template Gitignore
 # Byte-compiled / optimized / DLL files
@@ -305,4 +306,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
->>>>>>> Stashed changes
