@@ -86,6 +86,7 @@
 					</div>
 				</div>
 				<Button on:click={() => {imagesrc=`images/${image.filename}`; open = true}}>Review Image</Button>
+				<!-- <Button on:click={() => {imagesrc=image.path; open = true}}>Review Image</Button> -->
 				<Modal title="Manual Tagging" size="xl" imageFromData={imagesrc} bind:open={open}>
 					<div class="flex gap-4">
 						<img src={imagesrc} alt="Cat!" class="object-cover max-h-64"/>
@@ -125,7 +126,6 @@
 			</ul>
 			<Modal title="New Cat Registration" bind:open={newCatModal} size="lg">
 				<form class="flex flex-col space-y-6" method="POST" use:enhance>
-					<!-- <h3 class="text-xl font-medium text-gray-900 dark:text-white p-0">Sign in to our platform</h3> -->
 					<Label class="space-y-2 text-xl">
 						<span>Name</span>
 						<Input name="name" placeholder="Oreo" value="" required />
