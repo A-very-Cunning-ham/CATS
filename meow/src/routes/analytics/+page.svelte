@@ -282,7 +282,7 @@
 				<TableBodyCell>{image.catIDs[0]}</TableBodyCell>
 				<TableBodyCell>{image.catIDs[1]}</TableBodyCell>
 				<TableBodyCell>{image.catIDs[2]}</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
+				<TableBodyCell><a href="/your-cats">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
 			  {/each}
 			</TableBody>
@@ -302,58 +302,3 @@
 		</Dropzone>
 	</div>
 </section> -->
-
-<style>
-	.box {
-		width: 300px;
-		background-color: white;
-		border: 1px solid rgb(170, 170, 170);
-		border-radius: 20px;
-		box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-		padding: 3em;
-		margin: 4px 4px 4px 4px;
-	}
-
-	.chart {
-		width: 100%;
-		max-width: 500px;
-		margin: 0 auto;
-	}
-
-	svg {
-		position: relative;
-		width: 100%;
-		height: 200px;
-	}
-
-	.tick {
-		font-family: Helvetica, Arial;
-		font-size: .6em;
-		font-weight: 200;
-	}
-
-	.tick line {
-		stroke: #e2e2e2;
-		stroke-dasharray: 2;
-	}
-
-	.tick text {
-		fill: #000000;
-		text-anchor: start;
-	}
-
-	.tick.tick-0 line {
-		stroke-dasharray: 0;
-	}
-
-	.x-axis .tick text {
-		text-anchor: middle;
-	}
-
-	.bars rect {
-		fill: #a11;
-		stroke: none;
-		opacity: 0.65;
-	}
-
-</style>
