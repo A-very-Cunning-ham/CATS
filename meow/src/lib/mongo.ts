@@ -9,4 +9,4 @@ export function start_mongo() {
 	return client.connect();
 }
 
-export default client.db('mongodbVSCodePlaygroundDB')
+export default client.db('demo')
