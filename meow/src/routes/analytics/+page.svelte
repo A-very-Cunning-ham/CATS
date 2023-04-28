@@ -13,6 +13,10 @@
 	function restart() {
 		invalidateAll();
 	}
+
+	var dateFromObjectId2 = function (objectId) {
+		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toLocaleString('en-US', { timeZone: 'UTC' });
+	};
 	
 	const userInfo = JSON.parse(JSON.stringify($user))
 
@@ -25,6 +29,54 @@
 
 	let images_perm = data
 
+	let images_perm2 = {images: []}
+
+	let images_perm3 = {images: []}
+
+	for (let i: number = 0; i < images_perm.images.length; i++) {
+		if (images_perm.images[i].type == "cat") {
+			images_perm2.images.push(images_perm.images[i])
+		}
+	}
+
+	for (let i: number = 0; i < images_perm.images.length; i++) {
+		if (images_perm.images[i].type == "image") {
+			images_perm3.images.push(images_perm.images[i])
+		}
+	}
+	
+	console.log('images_perm2')
+	console.log(images_perm2)
+
+	for (let i: number = 0; i < images_perm3.images.length; i++) {
+		images_perm3.images[i].catIDs[0] = 0
+		images_perm3.images[i].catIDs[1] = 0
+		images_perm3.images[i].catIDs[2] = "Y"
+		for (let k: number = 0; k < images_perm3.images[i]['objects-found'].length; k++) {
+			if (images_perm3.images[i]['objects-found'][k].class == "Cat Ear") {
+				images_perm3.images[i].catIDs[0] = images_perm3.images[i].catIDs[0] + 1
+			}
+			if (images_perm3.images[i]['objects-found'][k].class == "Cat Face") {
+				images_perm3.images[i].catIDs[1] = images_perm3.images[i].catIDs[1] + 1
+			}
+		}
+		for (let j: number = 0; j < images_perm2.images.length; j++) {
+			for (let k: number = 0; k < images_perm2.images[j].events.length; k++) {
+				if (images_perm2.images[j].events[k] == images_perm3.images[i]._id) {
+					images_perm3.images[i].catIDs[2] = "N"
+				}
+			}
+		}
+	}
+
+	console.log('images_perm3')
+	console.log(images_perm3)
+
+	for (let i: number = 0; i < images_perm3.images.length; i++) {
+		console.log('image perm 3')
+		console.log(images_perm3.images[i].catIDs)
+	}
+
 	var dateFromObjectId = function (objectId) {
 		return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
 	};
@@ -36,9 +88,9 @@
 	
 	let days: Date[] = []
 
-	for (let i: number = 0; i < images_perm.images.length; i++) {
-		images_perm.images[i].date = new Date(dateFromObjectId(images_perm.images[i]._id))
-		days.push(images_perm.images[i].date)
+	for (let i: number = 0; i < images_perm3.images.length; i++) {
+		images_perm3.images[i].date = new Date(dateFromObjectId(images_perm3.images[i]._id))
+		days.push(images_perm3.images[i].date)
 	}
 
 	days.reverse()
@@ -202,43 +254,9 @@
 		<ButtonGroup class="space-x-px">
 		<Button class="self-center no-underline" color="blue" on:click={restart}>Load New Data</Button>
 		<Button class="" color="blue" on:click={onExport}>Export Graph</Button>
-		<Button class="" color="blue" on:click={export_csv}>Export CSV</Button>
+		<!--<Button class="" color="blue" on:click={export_csv}>Export CSV</Button>-->
 		</ButtonGroup>
 	</span>
-
-		<!-- <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
-			<svg>
-				 y axis 
-				<g class="axis y-axis">
-					{#each yTicks as tick}
-						<g class="tick tick-{tick}" transform="translate(0, {yScale(tick)})">
-							<line x2="100%"></line>
-							<text y="-4">{tick} {tick === 20 ? ' per 1,000 population' : ''}</text>
-						</g>
-					{/each}
-				</g>
-		
-				 x axis 
-				<g class="axis x-axis">
-					{#each points as point, i}
-						<g class="tick" transform="translate({xScale(i)},{height})">
-							<text x="{barWidth/2}" y="-4">{width > 380 ? point.date : formatMobile(point.date)}</text>
-						</g>
-					{/each}
-				</g>
-		
-				<g class='bars'>
-					{#each points as point, i}
-						<rect
-							x="{xScale(i) + 2}"
-							y="{yScale(point.cats)}"
-							width="{barWidth - 4}"
-							height="{yScale(0) - yScale(point.cats)}"
-						></rect>
-					{/each}
-				</g>
-			</svg>
-		</div> -->
 </section>
 
 <section class="mb-12">
@@ -251,76 +269,22 @@
 			<TableHead>
 			  <TableHeadCell>Date</TableHeadCell>
 			  <TableHeadCell>Location</TableHeadCell>
-			  <TableHeadCell>Total Visits</TableHeadCell>
-			  <TableHeadCell>Face Recognized</TableHeadCell>
-			  <TableHeadCell>Ear Tipped</TableHeadCell>	
+			  <TableHeadCell>Ears</TableHeadCell>
+			  <TableHeadCell>Faces</TableHeadCell>
+			  <TableHeadCell>Needs Review</TableHeadCell>
 			  <TableHeadCell></TableHeadCell>		
 			</TableHead>
 			<TableBody >
+			  {#each images_perm3.images as image}
 			  <TableBodyRow>
-				<TableBodyCell>03-06-2023</TableBodyCell>
-				<TableBodyCell>Site 1</TableBodyCell>
-				<TableBodyCell>08</TableBodyCell>
-				<TableBodyCell>08/08</TableBodyCell>
-				<TableBodyCell>07/08</TableBodyCell>
+				<TableBodyCell>{dateFromObjectId2(image._id)}</TableBodyCell>
+				<TableBodyCell>{image.camera}</TableBodyCell>
+				<TableBodyCell>{image.catIDs[0]}</TableBodyCell>
+				<TableBodyCell>{image.catIDs[1]}</TableBodyCell>
+				<TableBodyCell>{image.catIDs[2]}</TableBodyCell>
 				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
 			  </TableBodyRow>
-			  <TableBodyRow>
-				<TableBodyCell>03-05-2023</TableBodyCell>
-				<TableBodyCell>Site 1</TableBodyCell>
-				<TableBodyCell>12</TableBodyCell>
-				<TableBodyCell>08/12</TableBodyCell>
-				<TableBodyCell>07/12</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
-			  </TableBodyRow>
-			  <TableBodyRow>
-				<TableBodyCell>03-04-2023</TableBodyCell>
-				<TableBodyCell>Site 1</TableBodyCell>
-				<TableBodyCell>10</TableBodyCell>
-				<TableBodyCell>07/10</TableBodyCell>
-				<TableBodyCell>05/10</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
-			  </TableBodyRow>
-			  <TableBodyRow>
-				<TableBodyCell>03-03-2023</TableBodyCell>
-				<TableBodyCell>Site 1</TableBodyCell>
-				<TableBodyCell>11</TableBodyCell>
-				<TableBodyCell>07/11</TableBodyCell>
-				<TableBodyCell>06/11</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
-			  </TableBodyRow>
-			  <TableBodyRow>
-				<TableBodyCell>03-02-2023</TableBodyCell>
-				<TableBodyCell>Site 1</TableBodyCell>
-				<TableBodyCell>12</TableBodyCell>
-				<TableBodyCell>05/12</TableBodyCell>
-				<TableBodyCell>05/12</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
-			  </TableBodyRow>
-			  <TableBodyRow>
-				<TableBodyCell>03-01-2023</TableBodyCell>
-				<TableBodyCell>Site 1</TableBodyCell>
-				<TableBodyCell>07</TableBodyCell>
-				<TableBodyCell>05/07</TableBodyCell>
-				<TableBodyCell>03/07</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
-			  </TableBodyRow>
-			  <TableBodyRow>
-				<TableBodyCell>02-28-2023</TableBodyCell>
-				<TableBodyCell>Site 1</TableBodyCell>
-				<TableBodyCell>10</TableBodyCell>
-				<TableBodyCell>04/10</TableBodyCell>
-				<TableBodyCell>04/10</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
-			  </TableBodyRow>
-			  <TableBodyRow>
-				<TableBodyCell>02-27-2023</TableBodyCell>
-				<TableBodyCell>Site 1</TableBodyCell>
-				<TableBodyCell>09</TableBodyCell>
-				<TableBodyCell>03/09</TableBodyCell>
-				<TableBodyCell>04/09</TableBodyCell>
-				<TableBodyCell><a href="/your-cats/cat-details">Snapshot</a></TableBodyCell>
-			  </TableBodyRow>
+			  {/each}
 			</TableBody>
 		  </Table>
 	</div>

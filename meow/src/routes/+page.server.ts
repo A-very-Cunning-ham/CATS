@@ -16,32 +16,16 @@ export const actions: Actions = {
 		}
 
 		data["type"] = "cat"
-		data["events"] = []
-
+		data["events"] = [data['events']]
 
 		const result = await images.insertOne(data);
 	
 		console.log('New cat added: ', data['name']);
+		console.log(result);
 		return {
 		  success: true,
 		};
 	  }
-	//   update: async ({ request }) => {
-	// 	const formData = await request.formData();
-	// 	const todoId = formData.get('todoId');
-	// 	const todoName = formData.get('todoName');
-	// 	await dbConnect();
-	// 	await TodoModel.findByIdAndUpdate(todoId, {
-	// 	  title: todoName,
-	// 	}).lean();
-	// 	await dbDisconnect();
-	
-	// 	console.log('Todo updated: ', todoId);
-	
-	// 	return {
-	// 	  success: true,
-	// 	};
-	//   }
 }
 
 export const load: PageServerLoad = async function() {
