@@ -232,7 +232,11 @@
 	<h1 class="py-5">Welcome Back, {userInfo.given_name}!</h1>
 	<span class="flex flex-col justify-center items-center py-6">
 		<p class="font-semibold text-2xl">
-			Site {images_perm.images[0].camera}
+			{#if images_perm3.images[0].camera}
+			Site {images_perm3.images[0].camera}
+			{:else}
+			Site Default
+			{/if}
 		</p>
 		<p class="text-xl">
 			Cats detected (per day)
