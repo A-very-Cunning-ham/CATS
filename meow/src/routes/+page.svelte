@@ -17,6 +17,7 @@
 	let detectedCats = 1;
 	let recognized = 0;
 	let unrecognized = 1;
+	let currentId = 0;
 
 	let open = false;
 
@@ -35,20 +36,6 @@
 		//unique = {} // every {} is unique, {} === {} evaluates to false
 		invalidateAll();
 	}
-
-	// async function addNewCat(e){
-	// 	const formData = new FormData(e.target);
-
-	// 	const data = {};
-		
-	// 	for (let field of formData) {
-	// 		const [key, value] = field;
-	// 		data[key] = value;
-	// 	}
-		
-	// 	const result = await images.insertOne(e)
-	// 	return result
-	// }
   
 </script>
 
@@ -76,7 +63,7 @@
 			{#if image['type'] == 'image'}
 			<li>
 				<Card class="flex flex-col gap-6 justify-between self-center content-center p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 hover:no-underline min-h-full">
-				<img src="{image.path}" alt="Cat!" class="object-cover max-h-64"/>
+				<img src="./src/lib/images/cats/{image.filename}" alt="Cat!" class="object-cover max-h-64"/>
 				<div>
 					<h6 class="font-bold">Time Detected: </h6>
 					<h6>{dateFromObjectId(image._id)}</h6>
@@ -85,8 +72,7 @@
 					<h6> {image['object-detected']} </h6>
 					</div>
 				</div>
-				<Button on:click={() => {imagesrc=`images/${image.filename}`; open = true}}>Review Image</Button>
-				<!-- <Button on:click={() => {imagesrc=image.path; open = true}}>Review Image</Button> -->
+				<Button on:click={() => {imagesrc=`./src/lib/images/cats/${image.filename}`;currentId=image._id; open = true}}>Review Image</Button>
 				<Modal title="Manual Tagging" size="xl" imageFromData={imagesrc} bind:open={open}>
 					<div class="flex gap-4">
 						<img src={imagesrc} alt="Cat!" class="object-cover max-h-64"/>
@@ -146,6 +132,7 @@
 							<span>Eartipped?</span>
 							<Select class="mt-2 border-none" name="neutered" items={options} bind:value={selected} required/></Label>
 					</div>
+					<Input type="hidden" name="events" value={currentId} />
 					<Button type="submit">Submit</Button>
 					<div class="text-sm font-medium text-gray-500 dark:text-gray-300">
 						Leave fields blank if unsure.

@@ -32,7 +32,7 @@
     <div>
 		<h1>Your Cats</h1>
 		<div class="flex justify-center self-center">
-			<p>Camera {images[0].camera}</p>
+			<!--<p>Site {images[0].camera}</p>-->
 			<div></div>
 			
 		</div>
