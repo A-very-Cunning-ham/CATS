@@ -16,36 +16,6 @@
 	
 	const userInfo = JSON.parse(JSON.stringify($user))
 
-	// let points: { date: string, cats: number }[] = []
-
-	// let amounts = [1,2,5,3,0,2,1,5,6,0,3,0,1,3,2,4]
-
-	// for(let x = 1; x < 11; x++){
-	// 	points.push({date: 'Feb ' + x, cats: amounts[x] })
-	// }
-
-	// const xTicks = ['Feb 1 2023', 'Feb 2 2023', 'Feb 3 2023', 'Feb 4 2023', 'Feb 5 2023', 'Feb 6 2023', 'Feb 7 2023', 'Feb 8 2023', 'Feb 9 2023', 'Feb 10 2023', 'Feb 11 2023'];
-	// const yTicks = [0, 1, 2, 3, 4, 5, 6];
-	// const padding = { top: 20, right: 15, bottom: 20, left: 25 };
-
-	// let width = 500;
-	// let height = 200;
-
-	// function formatMobile(tick) {
-	// 	return "'" + tick.toString().slice(-2);
-	// }
-
-	// $: xScale = scaleLinear()
-	// 	.domain([0, xTicks.length])
-	// 	.range([padding.left, width - padding.right]);
-
-	// $: yScale = scaleLinear()
-	// 	.domain([0, Math.max.apply(null, yTicks)])
-	// 	.range([height - padding.bottom, padding.top]);
-
-	// $: innerWidth = width - (padding.left + padding.right);
-	// $: barWidth = innerWidth / xTicks.length;
-
 	let dateRanger1 = new Date(new Date().setDate(new Date().getDate() - 7))
 	dateRanger1.setHours(0,0,0)
 	let dateRanger2 = new Date()
@@ -123,8 +93,6 @@
 		}
 	]
 	};
-
-	let files;
 
 	function updateRange() {
 		console.log("Updating range")
