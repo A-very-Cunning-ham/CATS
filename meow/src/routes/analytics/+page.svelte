@@ -20,9 +20,9 @@
 	
 	const userInfo = JSON.parse(JSON.stringify($user))
 
-	let dateRanger1 = new Date(new Date().setDate(new Date().getDate() - 7))
+	let dateRanger1 = new Date(new Date().setDate(new Date().getDate() - 27))
 	dateRanger1.setHours(0,0,0)
-	let dateRanger2 = new Date()
+	let dateRanger2 = new Date(new Date().setDate(new Date().getDate() - 15))
 	dateRanger2.setHours(23,59,59)
 
 	$: ({images} = data)
