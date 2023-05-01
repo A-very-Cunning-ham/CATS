@@ -20,7 +20,7 @@ export const actions = {
 		console.log(formData);
 		const doc = {
 			type: "cat",
-			events: [1],
+			events: [[new ObjectId]],
 			name: formData.get('name'),
 			age: formData.get('age'),
 			weight: formData.get('weight'),

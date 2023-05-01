@@ -22,19 +22,19 @@
 	</div>
 	<div class="grid grid-cols-2 gap-4 pt-4">
 		<div class="flex flex-col justify-self-center justify-items-center align-middle gap-4">
-			{#if catInfo.events}
+			<!-- {#if catInfo.events}
 			<Avatar src="../{catInfo.events[0]}" size="lg" class="mb-4"/>
-			{:else}
-			<Avatar size="lg" class="mb-4"/>
-			{/if}
+			{:else} -->
+			<Avatar src=".src/lib/images/cats/1681197900-WGI_0462-000210-Full-00.jpg" size="lg" class="mb-4"/>
+			<!-- {/if} -->
 			<p class="font-bold text-xl">{catInfo.name}</p>
 			<p class="text-xl">Recent Captures:</p>
 			<div class="flex flex-col gap-2">
-			{#if catInfo.events}
+			<!-- {#if catInfo.events}
 				{#each catInfo.events as image}
 				<img src="../{image}" alt="Cat!" class="w-64"/>
 				{/each}
-			{/if}
+			{/if} -->
 			</div>
 		</div>
 		{#if !editing}
